@@ -66,6 +66,7 @@
 |setTelefone( )|
 |darAlta( )|
 |retirarAlta( )|
+|imprmirDados( )|
 
 ### Classe Paciente : Pessoa
 |Responsabilidades  | Colaborações |
@@ -80,7 +81,7 @@
 |setProntuario( )|
 |imprimirQueixa( )|
 |imprimirProntuário( )|
-|imprimirPacientes( )|
+|imprimirDados( )|
 
 ### Classe Psicologo : Pessoa
 |Responsabilidades| Colaborações |
@@ -88,7 +89,7 @@
 |numeroCRP  | Paciente |
 |Psicologo( )| Agenda|
 |~Psicologo( )|
-|imprimirPacientes( )|
+|imprimirDados( )|
 
 ### Classe Agenda
 |Responsabilidades| Colaborações |
