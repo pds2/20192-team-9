@@ -43,7 +43,7 @@
 -   Critérios de aceitação
 	-  Buscar paciente por nome ou matrícula
     - Permitir campo de texto para relatar informações do cliente
-## CRC
+# CRC
 ### Classe Administrador
 | Responsabilidades | Colaborações  |
 |--|--|
