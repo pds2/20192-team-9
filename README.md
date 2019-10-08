@@ -78,8 +78,9 @@
 |~Paciente( )|
 |setQueixa( )|
 |setProntuario( )|
-|getQueixa( )|
-|getProntuario( )|
+|imprimirQueixa( )|
+|imprimirProntuário( )|
+|imprimirPacientes( )|
 
 ### Classe Psicologo : Pessoa
 |Responsabilidades| Colaborações |
@@ -87,6 +88,7 @@
 |numeroCRP  | Paciente |
 |Psicologo( )| Agenda|
 |~Psicologo( )|
+|imprimirPacientes( )|
 
 ### Classe Agenda
 |Responsabilidades| Colaborações |
@@ -95,13 +97,16 @@
 |seteDias|Paciente|
 |mesAtual|
 |mesPosterior|
-| marcarConsulta( ) |
+|marcarConsulta( )|
+|imprimirAgenda( )|
+
 ### Classe Financeiro
 |Responsabilidades| Colaborações |
 |--|--|
 |arrecadacaoMensal  | Agenda |
 |arrecadacaoAnual|Paciente|
 |pagar( )|Secretaria|
+|imprimirArrecadacao( )|
 
 
 
