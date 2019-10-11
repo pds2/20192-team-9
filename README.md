@@ -17,7 +17,7 @@
     -   Exibir opção de editar cadastros dos clientes.
     -   Buscar paciente por Nome ou ID (sem acesso ao prontuário)
     -   Visualizar todos os pacientes
-    - 
+    
 #### *"Como secretária da clínica eu gostaria de visualizar a agenda dos psicólogos para poder marcar uma consulta ou verificar uma marcação"*
 
    - Critérios de aceitação
