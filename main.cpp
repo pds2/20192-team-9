@@ -1,44 +1,34 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-void login()
+void mostrarOpcoes(string frases[])
 {
-    system("CLS");
-    string user, password;
-    cout << "Informe seu ID" << endl;
-    cin >> user;
-    system("CLS");
-    cout << "Informe sua senha" << endl;
-    cin >> password;
-    system("CLS");
-    cout << "O login foi feito!" << endl;
-    system("pause");
+	int i = 0;
+	while (frases[i] != "end")
+	{
+		cout << i+1 << "." << frases[i] << endl;
+		i++;
+	}
 }
 
-void quit()
-{
-    system("CLS");
-    cout << "Obrigado por usar nosso programa" << endl;
-    system("pause");
-    cin.get();
+void paginaInicial() {
+	system("CLS");
+	string frases[] = { "Entrar como Secretaria", "Entrar como Psicologo", "Cadastrar Psicologo","Cadastrar Scretaria","Sair Do Programa", "end" };
+	mostrarOpcoes(frases);
+	int entrada;
+	cin >> entrada;
+	switch (entrada) {
+		case 1:
+			system("CLS");
+			cout << "Entrou como secretaria!" << endl;
+			break;
+	}
+	system("pause");
 }
 
 int main() {
-    int input;
-    cout << "-----------------------------------------"<< endl;
-    cout << "1. Fazer login" << endl;
-    cout << "2. Sair do Programa" << endl;
-    cout << "-----------------------------------------"<< endl;
-    cin >> input;
-    switch ( input )
-    {
-        case 1:
-            login();
-            break;
-        case 2:
-            quit();
-            break;
-    }
+	paginaInicial();
 }
