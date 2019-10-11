@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "secretaria.h"
 
 using namespace std;
 
@@ -8,12 +9,12 @@ void mostrarOpcoes(string frases[]);		// Funcao para facilitar a exbicao de mens
 void cadastrar(string tipo);
 void paginaInicial();
 
-void mostrarOpcoes(string frases[])
+void mostrarOpcoes(string opcoes[])
 {
 	int i = 0;
-	while (frases[i] != "end")
+	while (opcoes[i] != "end")
 	{
-		cout << i + 1 << "." << frases[i] << endl;
+		cout << i + 1 << "." << opcoes[i] << endl;
 		i++;
 	}
 }
@@ -47,10 +48,25 @@ void cadastrar(string tipo)
 	paginaInicial();
 }
 
+void ambienteSecretaria()
+{
+	string opcoes[] = {"Visualizar Secretarias","Visualizar Psicologos"};
+	mostrarOpcoes(opcoes);
+	int entrada;
+	cin >> entrada;
+	system("CLS");
+	switch (entrada) {
+	case 1:
+		break;
+	case 2:
+		break;
+	}
+}
+
 void paginaInicial() {
 	system("CLS");
-	string frases[] = { "Entrar como Secretaria", "Entrar como Psicologo", "Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa", "end" };
-	mostrarOpcoes(frases);
+	string opcoes[] = { "Entrar como Secretaria", "Entrar como Psicologo", "Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa", "end" };
+	mostrarOpcoes(opcoes);
 	int entrada;
 	cin >> entrada;
 	system("CLS");
@@ -69,9 +85,8 @@ void paginaInicial() {
 		break;
 	case 5:
 		cout << "Obrigador por usar nosso programa!" << endl;
-		cin.get();
+		system("pause");
 	}
-	system("pause");
 }
 
 int main() {
