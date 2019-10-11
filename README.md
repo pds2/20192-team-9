@@ -1,4 +1,9 @@
-﻿# UserStories
+﻿# Como rodar o código?
+> É necessário ter make instalado na sua máquina
+- Digite make run para compilar todos os arquivos e gerar um executável
+- Digite make clean para remover objetos criados e executável
+
+# UserStories
 
 ## Administrador
 
