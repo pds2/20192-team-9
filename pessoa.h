@@ -7,7 +7,7 @@
 using namespace std;
 
 class Pessoa{
-private:
+protected:
 	string ID;
 	string nome;
 	string endereco;

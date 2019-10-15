@@ -1,9 +1,12 @@
+#include "psicologo.h"
 #include "sistema.h"
 
 using namespace std;
 
 int main() {
-	system("title SistemaClinica");
-	Sistema sistema;
-	sistema.paginaInicial();
+	Psicologo psi("Teste","Teste","Teste","Teste","Teste","Teste");
+	// system("title SistemaClinica");
+	// Sistema sistema;
+	// sistema.paginaInicial();
+	return 0;
 }
