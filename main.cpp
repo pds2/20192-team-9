@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 #include "secretaria.h"
+#include "paciente.h"
+#include "pessoa.h"
 
 using namespace std;
 

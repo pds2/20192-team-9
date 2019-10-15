@@ -10,6 +10,10 @@ run: main.o
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
+pessoa.o: pessoa.cpp
+	$(CC) $(CFLAGS) pessoa.cpp
+paciente.o: paciente.cpp
+	$(CC) $(CFLAGS) paciente.cpp
 
 clean: 
 	rm *.o sistemaClinica.exe

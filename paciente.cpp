@@ -1,26 +1,28 @@
-#include "pessoa.h"
 #include "paciente.h"
 
 // (PACIENTE) CONSTRUTORES E DESTRUTORES
-Paciente::Paciente():Pessoa(){
-	this->psicologoResponsavel = "";
-	this->queixa = ""; 
-	this->mensalidade = 0;
-	this->prontuario = "";
+Paciente::Paciente()
+	:
+	psicologoResponsavel(""),
+	queixa(""),
+	mensalidade(0),
+	prontuario("")
+{
 }
 
 Paciente::Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
-		string pr, string queixa, float mensalidade, string prontuario): 
-		Pessoa(id, nome, endereco, telefone, dataInicio)
+		string pr, string queixa, float mensalidade, string prontuario)
+		: 
+		Pessoa(id, nome, endereco, telefone, dataInicio),
+		psicologoResponsavel(pr),
+		queixa(queixa),
+		mensalidade(mensalidade),
+		prontuario(prontuario)
 {
-	this->psicologoResponsavel = pr;
-	this->queixa = queixa;
-	this->mensalidade = mensalidade;
-	this->prontuario = prontuario;
 }
 
 Paciente::~Paciente(){
-	cout << "Destrutor Paciente";
+	cout << "Destrutor Paciente" << endl;
 }
 
 // (PACIENTE) SETTERS (Setar informação dos atributos da classe)

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include "paciente.h"
+#include "pessoa.h"
 
 using namespace std;
 
@@ -16,17 +16,16 @@ private:
 
 public:
 	// CONSTRUTORES E DESTRUTORES
-	Paciente():Pessoa();
-	Paciente(string, string, string, string, string, 
-			string, string, float, string): 
-			Pessoa(string, string, string, string, string);
+	Paciente();
+	Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
+		string pr, string queixa, float mensalidade, string prontuario);
 	~Paciente();
 
 	// SETTERS (Setar informação dos atributos da classe)
-	void setPsicologoResponsavel(string);
-	void setQueixa(string);
-	void setMensalidade(float);
-	void setProntuario(string);
+	void setPsicologoResponsavel(string pr);
+	void setQueixa(string queixa);
+	void setMensalidade(float mensalidade);
+	void setProntuario(string prontuario);
 
 	// GETTERS (Retornar informação dos atributos da classe)
 	string getPsicologoResponsavel();

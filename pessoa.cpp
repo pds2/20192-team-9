@@ -1,22 +1,26 @@
 #include "pessoa.h"
 
 // (PESSOA) CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
-Pessoa::Pessoa(){
-	this->ID = "";
-	this->nome = "";
-	this->endereco = "";
-	this->telefone = "";
-	this->dataInicio = "";
-	this->dataFim = "";
+Pessoa::Pessoa()
+	:
+	ID(""),
+	nome(""),
+	endereco(""),
+	telefone(""),
+	dataInicio(""),
+	dataFim("")
+{
 }
 
-Pessoa::Pessoa(string id, string nome, string endereco, string telefone, string dataInicio){
-	this->ID = id;
-	this->nome = nome;
-	this->endereco = endereco;
-	this->telefone = telefone;
-	this->dataInicio = dataInicio;
-	this->dataFim = "";
+Pessoa::Pessoa(string id, string nome, string endereco, string telefone, string dataInicio)
+:
+	ID(id),
+	nome(nome),
+	endereco(endereco),
+	telefone(telefone),
+	dataInicio(dataInicio),
+	dataFim("")
+{
 }
 
 Pessoa::~Pessoa(){

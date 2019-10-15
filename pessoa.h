@@ -19,16 +19,16 @@ public:
 
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
-	Pessoa(string, string, string, string, string);
+	Pessoa(string id, string nome, string endereco, string telefone, string dataInicio);
 	~Pessoa();
 
 	// SETTERS (Setar informação dos atributos da classe)
-	void setID(string);
-	void setEndereco(string);
-	void setNome(string);
-	void setTelefone(string);
-	void setDataInicio(string);
-	void setDataFim(string);
+	void setID(string ID);
+	void setEndereco(string endereco);
+	void setNome(string nome);
+	void setTelefone(string telefone);
+	void setDataInicio(string dataInicio);
+	void setDataFim(string dataFim);
 
 	// GETTERS (Retornar informação dos atributos da classe)
 	string getID();
