@@ -8,7 +8,6 @@ using namespace std;
 
 class Pessoa{
 private:
-	string ID;
 	string nome;
 	string endereco;
 	string telefone;
@@ -19,19 +18,17 @@ public:
 
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
-	Pessoa(string id, string nome, string endereco, string telefone, string dataInicio);
+	Pessoa(string nome, string endereco, string telefone, string dataInicio);
 	~Pessoa();
 
 	// SETTERS (Setar informação dos atributos da classe)
-	void setID(string ID);
 	void setEndereco(string endereco);
 	void setNome(string nome);
 	void setTelefone(string telefone);
 	void setDataInicio(string dataInicio);
 	void setDataFim(string dataFim);
-
+	void imprimirDados();
 	// GETTERS (Retornar informação dos atributos da classe)
-	string getID();
 	string getEndereco();
 	string getNome();
 	string getTelefone();

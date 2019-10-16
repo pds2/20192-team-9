@@ -15,9 +15,10 @@ private:
 	string prontuario;
 
 public:
+	static int quantidadePacientes;
 	// CONSTRUTORES E DESTRUTORES
-	Paciente();
-	Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
+	Paciente(string nome, string endereco, string telefone, string dataInicio);
+	Paciente(string nome, string endereco, string telefone, string dataInicio, 
 		string pr, string queixa, float mensalidade, string prontuario);
 	~Paciente();
 

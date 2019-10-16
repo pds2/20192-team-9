@@ -1,19 +1,23 @@
 #include "paciente.h"
 
 // (PACIENTE) CONSTRUTORES E DESTRUTORES
-Paciente::Paciente()
+Paciente::Paciente(string nome, string endereco, string telefone, string dataInicio)
 	:
+	Pessoa(nome, endereco, telefone, dataInicio),
 	psicologoResponsavel(""),
 	queixa(""),
 	mensalidade(0),
 	prontuario("")
 {
+	quantidadePacientes++;
 }
 
-Paciente::Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
+int Paciente::quantidadePacientes = 0;
+
+Paciente::Paciente(string nome, string endereco, string telefone, string dataInicio, 
 		string pr, string queixa, float mensalidade, string prontuario)
 		: 
-		Pessoa(id, nome, endereco, telefone, dataInicio),
+		Pessoa(nome, endereco, telefone, dataInicio),
 		psicologoResponsavel(pr),
 		queixa(queixa),
 		mensalidade(mensalidade),
@@ -22,8 +26,7 @@ Paciente::Paciente(string id, string nome, string endereco, string telefone, str
 }
 
 Paciente::~Paciente(){
-	cout << "Destrutor Paciente" << endl;
-}
+} 
 
 // (PACIENTE) SETTERS (Setar informação dos atributos da classe)
 void Paciente::setPsicologoResponsavel(string pr){
