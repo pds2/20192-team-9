@@ -54,51 +54,42 @@ void Sistema::cadastrar(string tipo)
 void Sistema::ambienteSecretaria()
 {
 	system("CLS");
-	string opcoes[] = {"Visualizar Secretarias","Visualizar Quantidade de Pacientes Cadastrados","Cadastrar Pacientes", "end"};
-	mostrarOpcoes(opcoes);
+	string opcoes[] = {"Visualizar Secretarias","Visualizar Quantidade de Pacientes Cadastrados","Cadastrar Pacientes", "Voltar para Pagina Inicial", "end"};
 	int entrada;
-	cin >> entrada;
-	std::system("CLS");
-	switch (entrada) {
-	case 1:
-		break;
-	case 2:
-		system("cls");
-		cout << "Quantidade de Pacientes cadastrados ate agora: "<< Paciente::quantidadePacientes << endl;
-		system("pause");
-		break;
-	case 3:
-		cadastrar("paciente.txt");
-		break;
+	while (true) {
+		std::system("CLS");
+		mostrarOpcoes(opcoes);
+		cin >> entrada;
+		if (entrada == 2)
+			system("cls");
+			cout << "Quantidade de Pacientes cadastrados ate agora: "<< Paciente::quantidadePacientes << endl;
+			system("pause");
+		if (entrada == 3)
+			cadastrar("paciente.txt");
+		if (entrada == 4)
+			break;
 	}
-	ambienteSecretaria();
 }
 
 void Sistema::paginaInicial() {
 	std::system("CLS");
 	string opcoes[] = { "Entrar como Secretaria", "Entrar como Psicologo", "Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa", "end" };
-	mostrarOpcoes(opcoes);
 	int entrada;
-	cin >> entrada;
-	std::system("CLS");
-	switch (entrada) {
-	case 1:
-		ambienteSecretaria();
-		paginaInicial();
-		break;
-	case 2:
-		//ambientePsicologo();
-		break;
-	case 3:
-		cadastrar("secretaria.txt");
-		paginaInicial();
-		break;
-	case 4:
-		cadastrar("psicologo.txt");
-		paginaInicial();
-		break;
-	case 5:
-		std::cout << "Obrigador por usar nosso programa!" << endl;
-		break;
+	while (true) {
+		mostrarOpcoes(opcoes);
+		cin >> entrada;
+		std::system("CLS");
+		if (entrada == 1)
+			ambienteSecretaria();
+		if (entrada == 2)
+			//ambientePsicologo();
+		if (entrada == 3)
+			cadastrar("secretaria.txt");
+		if (entrada == 4)
+			cadastrar("psicologo.txt");
+		if (entrada == 5) {
+			std::cout << "Obrigador por usar nosso programa!" << endl;
+			break;
+		}
 	}
 }
