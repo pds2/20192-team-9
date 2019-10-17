@@ -32,12 +32,7 @@
 	    -   Mostrar o nome de todos os psicólogos
 	    -   Mostrar horários vagos dos psicólogos
 	    -   Mostrar horário das consultas dos psicólogos com nome do paciente
-#### *"Como secretária da clínica eu gostaria de visualizar e dar baixa em pagamentos realizados para poder verificar o fluxo de caixa da organização."*
 
--   Critérios de aceitação
-    -   Visualização do pagamento mensal de cada cliente da clínica.
-    -   Dar baixa no pagamento efetuado exigindo ID, mês e quantia
-    -   Visualização do fechamento mensal e anual do caixa..
 ## Psicólogo
 #### *“Como psicólogo da clínica eu gostaria de visualizar minha agenda para saber quais pacientes atenderei e em quais dias.”*
 -   Critérios de aceitação
@@ -49,12 +44,6 @@
 	-  Buscar paciente por nome ou matrícula
     - Permitir campo de texto para relatar informações do cliente
 # CRC
-### Classe Administrador
-| Responsabilidades | Colaborações  |
-|--|--|
-|login| Secretaria |
-|senha|Psicologo|
-
 ### Classe Pessoa
 |Responsabilidades| Colaborações |
 |--|--|
@@ -106,13 +95,12 @@
 |marcarConsulta( )|
 |imprimirAgenda( )|
 
-### Classe Financeiro
+### Classe Secretária : Pessoa
 |Responsabilidades| Colaborações |
 |--|--|
-|arrecadacaoMensal  | Agenda |
-|arrecadacaoAnual|Paciente|
-|pagar( )|Secretaria|
-|imprimirArrecadacao( )|
+| | Agenda |
+||Paciente|
+||Secretaria|
 
 
 
