@@ -60,10 +60,11 @@ void Sistema::ambienteSecretaria()
 		std::system("CLS");
 		mostrarOpcoes(opcoes);
 		cin >> entrada;
-		if (entrada == 2)
+		if (entrada == 2) {
 			system("cls");
 			cout << "Quantidade de Pacientes cadastrados ate agora: "<< Paciente::quantidadePacientes << endl;
 			system("pause");
+		}
 		if (entrada == 3)
 			cadastrar("paciente.txt");
 		if (entrada == 4)
