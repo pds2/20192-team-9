@@ -11,7 +11,7 @@ Pessoa::Pessoa()
 {
 }
 
-Pessoa::Pessoa(string nome, string endereco, string telefone, string dataInicio)
+Pessoa::Pessoa(std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
 :
 	nome(nome),
 	endereco(endereco),
@@ -25,23 +25,23 @@ Pessoa::~Pessoa(){
 }
 
 // (PESSOA) SETTERS (Setar informação dos atributos da classe)
-void Pessoa::setEndereco(string endereco){
+void Pessoa::setEndereco(std::string endereco){
 	this->endereco = endereco;
 }
 
-void Pessoa::setNome(string nome){
+void Pessoa::setNome(std::string nome){
 	this->nome = nome;
 }
 
-void Pessoa::setTelefone(string telefone){
+void Pessoa::setTelefone(std::string telefone){
 	this->telefone = telefone;
 }
 
-void Pessoa::setDataInicio(string dataInicio){
+void Pessoa::setDataInicio(std::string dataInicio){
 	this->dataInicio = dataInicio;
 }
 
-void Pessoa::setDataFim(string dataFim){
+void Pessoa::setDataFim(std::string dataFim){
 	this->dataFim = dataFim;
 }
 
@@ -50,23 +50,23 @@ void Pessoa::imprimirDados() {
 }
 
 // (PESSOA) GETTERS (Retornar informação dos atributos da classe)
-string Pessoa::getEndereco(){
+std::string Pessoa::getEndereco(){
 	return this->endereco;
 }
 
-string Pessoa::getNome(){
+std::string Pessoa::getNome(){
 	return this->nome;
 }
 
-string Pessoa::getTelefone(){
+std::string Pessoa::getTelefone(){
 	return this->telefone;
 }
 
-string Pessoa::getDataInicio(){
+std::string Pessoa::getDataInicio(){
 	return this->dataInicio;
 }
 
-string Pessoa::getDataFim(){
+std::string Pessoa::getDataFim(){
 	return this->dataFim;
 }
 

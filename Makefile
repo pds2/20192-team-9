@@ -6,7 +6,7 @@ CFLAGS=-c -Wall -std=c++11
 all: run
 
 run: main.o sistema.o pessoa.o paciente.o 
-	$(CC) main.o pessoa.o paciente.o sistema.o  -o sistemaClinica
+	$(CC) main.o pessoa.o paciente.o sistema.o -o sistemaClinica
 
 main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -22,4 +22,4 @@ paciente.o: paciente.cpp
 
 
 clean: 
-	rm *.o sistemaClinica.exe
+	rm *.o sistemaClinica

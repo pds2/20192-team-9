@@ -10,12 +10,14 @@
 
 
 class Sistema {
-    
+private:
+    std::vector<Paciente> pacientes;
 public:
-    vector<Paciente> pacientes;
     Sistema();
-    void mostrarOpcoes(string frases[]);		// Funcao para facilitar a exbicao de mensagens
+    void limparTela();
+    void imprimirPacientes();
+    void mostrarOpcoes(std::string frases[]);		// Funcao para facilitar a exbicao de mensagens
     void paginaInicial();
-    void cadastrar(string tipo);
+    void cadastrar(std::string tipo);
     void ambienteSecretaria();
 };
