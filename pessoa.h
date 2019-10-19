@@ -5,7 +5,7 @@
 #include <string>
 
 class Pessoa{
-private:
+protected:
 	std::string nome;
 	std::string endereco;
 	std::string telefone;

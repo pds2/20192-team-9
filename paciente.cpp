@@ -4,10 +4,10 @@
 Paciente::Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
 	:
 	Pessoa(nome, endereco, telefone, dataInicio),
-	psicologoResponsavel(""),
-	queixa(""),
+	psicologoResponsavel(" - "),
+	queixa(" - "),
 	mensalidade(0),
-	prontuario("")
+	prontuario(" - ")
 {
 	quantidadePacientes++;
 }
@@ -63,4 +63,6 @@ std::string Paciente::getProntuario(){
 }
 
 void Paciente::imprimirDados() {
+	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
+	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
 }

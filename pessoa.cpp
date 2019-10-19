@@ -3,11 +3,11 @@
 // (PESSOA) CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 Pessoa::Pessoa()
 	:
-	nome(""),
-	endereco(""),
-	telefone(""),
-	dataInicio(""),
-	dataFim("")
+	nome(" - "),
+	endereco(" - "),
+	telefone(" - "),
+	dataInicio(" - "),
+	dataFim(" - ")
 {
 }
 
@@ -17,7 +17,7 @@ Pessoa::Pessoa(std::string nome, std::string endereco, std::string telefone, std
 	endereco(endereco),
 	telefone(telefone),
 	dataInicio(dataInicio),
-	dataFim("")
+	dataFim(" - ")
 {
 }
 

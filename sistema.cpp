@@ -71,7 +71,6 @@ void Sistema::ambienteSecretaria()
 		limparTela();
 		if (entrada == 1) {
 			imprimirPacientes();
-			
 		} else if (entrada == 2) {
 			std::cout << "Quantidade de Pacientes cadastrados ate agora: "<< Paciente::quantidadePacientes << std::endl;
 			std::cin.ignore();
@@ -86,8 +85,16 @@ void Sistema::ambienteSecretaria()
 
 void Sistema::imprimirPacientes() {
 	std::cout << "Nome|" << "Endereco|" << "Telefone|" << "Data de Entrada|" << "Data de Saida|" << "Psicologo Responsavel|" << "Queixa|" << "Mensalidade" << std::endl;
-	pacientes[0].imprimirDados();
-
+	std::cout << "=============================================================================================" << std::endl;
+	
+	if(pacientes.size() == 0) {
+		std::cout << "Nenhum Paciente Cadastrado nessa sessão" << std::endl;
+	} else  {
+		for(std::vector<int>::size_type i = 0; i != pacientes.size(); i++) {
+			pacientes[i].imprimirDados();
+		}
+	}
+	
 	std::cin.ignore();
 	std::cin.get();
 }
