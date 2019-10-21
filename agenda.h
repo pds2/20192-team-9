@@ -17,13 +17,13 @@ struct Node
 
 struct Agenda
 {
-	Node *proximo;
-	Node *anterior;
+	Node *inicio;
+	Node *fim;
 	Agenda();
 	~Agenda();
 	void Marcar_consulta();
-	void Desmarcar_consulta();
-	void get_consulta();
+	void Desmarcar_consulta(std::string paciente);
+	void get_consulta(std::string paciente);
 };
 
 
