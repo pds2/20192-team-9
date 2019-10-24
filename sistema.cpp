@@ -1,7 +1,26 @@
 #include "sistema.h"
 
-Sistema::Sistema()
-{
+Sistema::Sistema() {
+
+	std::ifstream infile("paciente.txt");
+	if(!infile.is_open()) {
+		std::cout << "Não foi possível abrir o arquivo" << std::endl;
+		infile.clear();
+	} else {
+		while(infile) {
+			std::string s;
+			if (!getline(infile, s)) break;
+
+			std::istringstream ss( s );
+			std::vector<std::string> pessoa;
+			while(ss) {
+				std::string s;
+				if(!getline(ss, s, ',')) break;
+				pessoa.push_back(s);
+			}
+			pacientes.push_back(Paciente(pessoa[0], pessoa[1], pessoa[2], pessoa[3]));
+		}
+	}
 }
 
 void Sistema::mostrarOpcoes(std::string opcoes[])
@@ -22,46 +41,38 @@ void Sistema::limparTela() {
 	#endif
 }
 
-void Sistema::cadastrar(std::string tipo)
-{
+void Sistema::cadastrar(std::string tipo) {
 	std::ofstream pessoa;
 	pessoa.open(tipo, std::ios::app);
 
-	std::string dados[5];
-	std::cout << "Preencha os dados abaixo" << std::endl;
-	std::cout << "Nome: ";
-	std::cin.ignore();
-	getline(std::cin, dados[0]);
-	std::cout << "Endereco: ";
-	getline(std::cin, dados[1]);
-	std::cout << "Telefone: ";
-	getline(std::cin, dados[2]);
-	std::cout << "Data de Inicio: ";
-	getline(std::cin, dados[3]);
-
-	pessoa << dados[0] << ", " << dados[1] << ", " << dados[2] << ", " << dados[3] << ", ";
-
-	if(tipo == "psicologo.txt")
-	{
-		std::cout << "Numero CRP:";
-		getline(std::cin, dados[4]);
-		pessoa << dados[4] <<  std::endl;
-	} else {
-		pessoa << std::endl;
-		if(tipo == "paciente.txt") {
-			pacientes.push_back(Paciente(dados[0], dados[1], dados[2], dados[3]));
-		}
-
+	std::vector<std::string> informacoes = {"Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: "};
+	if(tipo == "psicologo.txt") {
+		informacoes.push_back("Numero: CRP: ");
 	}
+	std::cout << "Preencha os dados abaixo" << std::endl;
+
+	std::vector<std::string> dados;
+	for(std::vector<int>::size_type i = 0; i != informacoes.size(); i++) {
+		std::string entrada;
+		std::cout << informacoes[i];
+		std::cin >> entrada;
+		dados.push_back(entrada);
+		pessoa << dados[i] << ",";
+	}
+	pessoa << std::endl;
 	pessoa.close();
 
+	if(tipo == "paciente.txt") {
+		pacientes.push_back(Paciente(dados[0], dados[1], dados[2], dados[3]));
+	}
 	std::cout << "Pessoa cadastrada!" << std::endl;
+	std::cin.ignore();
 	std::cin.get();
 }
 
 void Sistema::ambienteSecretaria()
 {
-	std::string opcoes[] = {"Visualizar Pacientes","Visualizar Quantidade de Pacientes Cadastrados","Cadastrar Pacientes", "Voltar para Pagina Inicial", "end"};
+	std::string opcoes[] = {"Visualizar Pacientes","Marcar Consulta","Cadastrar Pacientes", "Voltar para Pagina Inicial", "end"};
 	int entrada;
 
 	while (true) {
@@ -72,9 +83,7 @@ void Sistema::ambienteSecretaria()
 		if (entrada == 1) {
 			imprimirPacientes();
 		} else if (entrada == 2) {
-			std::cout << "Quantidade de Pacientes cadastrados ate agora: "<< Paciente::quantidadePacientes << std::endl;
-			std::cin.ignore();
-			std::cin.get();
+			marcarConsulta();
 		} else if (entrada == 3) {
 			cadastrar("paciente.txt");
 		} else if (entrada == 4) {
@@ -83,20 +92,39 @@ void Sistema::ambienteSecretaria()
 	}
 }
 
+void Sistema::marcarConsulta() {
+	std::cout << "Digite o nome do Paciente" << std::endl;
+}
+
 void Sistema::imprimirPacientes() {
-	std::cout << "Nome|" << "Endereco|" << "Telefone|" << "Data de Entrada|" << "Data de Saida|" << "Psicologo Responsavel|" << "Queixa|" << "Mensalidade" << std::endl;
-	std::cout << "=============================================================================================" << std::endl;
-	
-	if(pacientes.size() == 0) {
-		std::cout << "Nenhum Paciente Cadastrado nessa sessão" << std::endl;
-	} else  {
-		for(std::vector<int>::size_type i = 0; i != pacientes.size(); i++) {
-			pacientes[i].imprimirDados();
+	while(true) {
+		std::cout << "Nome|" << "Endereco|" << "Telefone|" << "Data de Entrada|" << "Data de Saida|" << "Psicologo Responsavel|" << "Queixa|" << "Mensalidade" << std::endl;
+		std::cout << "=============================================================================================" << std::endl;
+		
+		if(pacientes.size() == 0) {
+			std::cout << "Nenhum Paciente Cadastrado" << std::endl;
+		} else  {
+			for(std::vector<int>::size_type i = 0; i != pacientes.size(); i++) {
+				pacientes[i].imprimirDados();
+			}
+		}
+		std::cout << "=============================================================================================" << std::endl;
+		std::cout << "Total de Pacientes: " << Paciente::quantidadePacientes << std::endl;
+
+		std::cout << "1. Limpar Pacientes" << std::endl;
+		std::cout << "2. Voltar" << std::endl;
+		
+		int entrada;
+		std::cin.ignore();
+		std::cin >> entrada;
+		if(entrada == 1) {
+			limparTela();
+			remove("paciente.txt");
+			pacientes.clear();
+		} else if(entrada == 2) {
+			break;
 		}
 	}
-	
-	std::cin.ignore();
-	std::cin.get();
 }
 
 void Sistema::paginaInicial() {

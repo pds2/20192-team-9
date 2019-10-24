@@ -1,6 +1,10 @@
 #ifndef AGENDA_H_
 #define AGENDA_H_
 
+#include <string>
+#include <iostream>
+#include <stdbool.h>
+
 struct Data_consulta
 {
 	int min, hora, dia, mes, ano;
@@ -21,8 +25,8 @@ struct Agenda
 	Node *fim;
 	Agenda();
 	~Agenda();
-	void Marcar_consulta();
-	void Desmarcar_consulta(std::string paciente);
+	void marcar_consulta();
+	void desmarcar_consulta(std::string paciente);
 	void get_consulta(std::string paciente);
 };
 

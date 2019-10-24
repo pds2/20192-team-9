@@ -1,6 +1,5 @@
 #include "agenda.h"
-#include <iostream>
-#include <stdbool.h>
+
 Agenda::Agenda() 
 {
    this->inicio = nullptr;
@@ -18,7 +17,7 @@ Agenda::~Agenda()
    }
 }
 
-void Agenda::Marcar_consulta()
+void Agenda::marcar_consulta()
 {
    Node *novo = new Node;
    novo->proximo=nullptr;
@@ -46,7 +45,7 @@ void Agenda::Marcar_consulta()
    }
 }
 
-void Agenda::Desmarcar_consulta(std::string paciente)
+void Agenda::desmarcar_consulta(std::string paciente)
 {
 	Node *aux=nullptr;
 	Node *aux2=nullptr;

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <vector>
 #include "secretaria.h"
@@ -18,6 +19,7 @@ public:
     void imprimirPacientes();
     void mostrarOpcoes(std::string frases[]);		// Funcao para facilitar a exbicao de mensagens
     void paginaInicial();
-    void cadastrar(std::string tipo);
+    void cadastrar(std::string tipo);               //Instancia objetos e salva em arquivo txt
     void ambienteSecretaria();
+    void marcarConsulta();
 };
