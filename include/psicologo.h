@@ -13,6 +13,7 @@ class Psicologo : Pessoa, Funcionario {
 		Psicologo(std::string CRP, std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
 		~Psicologo();
 
+		//Consultar os pacientes do dia do psicologo selecionado
 		std::string consultarAgendaDia(Psicologo * p) override;
 		std::string proximaConsulta(Psicologo * p) override;
 		std::string adicionarConsulta(Psicologo * p, std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora) override;
