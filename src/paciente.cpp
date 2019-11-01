@@ -1,13 +1,11 @@
 #include "paciente.h"
 
 // (PACIENTE) CONSTRUTORES E DESTRUTORES
-Paciente::Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
+Paciente::Paciente(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio, std::string dataFim)
 	:
-	Pessoa(nome, endereco, telefone, dataInicio),
+	Pessoa(CPF, nome, endereco, telefone, dataInicio, dataFim),
 	psicologoResponsavel(" - "),
-	queixa(" - "),
-	mensalidade(0),
-	prontuario(" - ")
+	queixa(" - ")
 {
 	quantidadePacientes++;
 }
@@ -19,9 +17,7 @@ Paciente::Paciente(std::string nome, std::string endereco, std::string telefone,
 		: 
 		Pessoa(nome, endereco, telefone, dataInicio),
 		psicologoResponsavel(pr),
-		queixa(queixa),
-		mensalidade(mensalidade),
-		prontuario(prontuario)
+		queixa(queixa);
 {
 }
 
@@ -37,13 +33,6 @@ void Paciente::setQueixa(std::string queixa){
 	this->queixa = queixa;
 }
 
-void Paciente::setMensalidade(float mensalidade){
-	this->mensalidade = mensalidade;
-}
-
-void Paciente::setProntuario(std::string prontuario){
-	this->prontuario = prontuario;
-}
 
 // GETTERS (Retornar informação dos atributos da classe)
 std::string Paciente::getPsicologoResponsavel(){
@@ -54,15 +43,9 @@ std::string Paciente::getQueixa(){
 	return this->queixa;
 }
 
-float Paciente::getMensalidade(){
-	return this->mensalidade;
-}
+void Paciente::addEntrada(std::string CRP, std::string entrada){
+	if (CRP==this->psicologoResponsavel){
+		this->prontuario.push_back(entrada);
+	}
 
-std::string Paciente::getProntuario(){
-	return this->prontuario;
-}
-
-void Paciente::imprimirDados() {
-	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
-	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
 }
