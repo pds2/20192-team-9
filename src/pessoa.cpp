@@ -3,6 +3,7 @@
 // (PESSOA) CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 Pessoa::Pessoa()
 	:
+	CPF(" - "),
 	nome(" - "),
 	endereco(" - "),
 	telefone(" - "),
@@ -13,6 +14,7 @@ Pessoa::Pessoa()
 
 Pessoa::Pessoa(std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
 :
+	CPF(CPF),
 	nome(nome),
 	endereco(endereco),
 	telefone(telefone),
@@ -25,6 +27,9 @@ Pessoa::~Pessoa(){
 }
 
 // (PESSOA) SETTERS (Setar informação dos atributos da classe)
+void Pessoa::setCPF(std::string CPF){
+	this->CPF = CPF;
+}
 void Pessoa::setEndereco(std::string endereco){
 	this->endereco = endereco;
 }
@@ -50,6 +55,10 @@ void Pessoa::imprimirDados() {
 }
 
 // (PESSOA) GETTERS (Retornar informação dos atributos da classe)
+std::string Pessoa::getCPF(){
+	return this->CPF;
+}
+
 std::string Pessoa::getEndereco(){
 	return this->endereco;
 }

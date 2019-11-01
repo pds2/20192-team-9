@@ -6,6 +6,7 @@
 
 class Pessoa{
 protected:
+	std::string CPF;
 	std::string nome;
 	std::string endereco;
 	std::string telefone;
@@ -16,17 +17,18 @@ public:
 
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
-	Pessoa(std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
+	Pessoa(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
 	~Pessoa();
 
 	// SETTERS (Setar informação dos atributos da classe)
+	void setCPF(std::string CPF);
 	void setEndereco(std::string endereco);
 	void setNome(std::string nome);
 	void setTelefone(std::string telefone);
 	void setDataInicio(std::string dataInicio);
 	void setDataFim(std::string dataFim);
-	void imprimirDados();
 	// GETTERS (Retornar informação dos atributos da classe)
+	std::string getCPF();
 	std::string getEndereco();
 	std::string getNome();
 	std::string getTelefone();
