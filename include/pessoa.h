@@ -4,40 +4,34 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 class Pessoa{
 protected:
-	int ID;
-	string cpf;
-	string nome;
-	string endereco;
-	string telefone;
-	string dataInicio;
-	string dataFim;
+	std::string nome;
+	std::string endereco;
+	std::string telefone;
+	std::string dataInicio;
+	std::string dataFim;
 
 public:
 
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
-	Pessoa(string id, string nome, string endereco, string telefone, string dataInicio);
+	Pessoa(std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
 	~Pessoa();
 
 	// SETTERS (Setar informação dos atributos da classe)
-	void setID(string ID);
-	void setEndereco(string endereco);
-	void setNome(string nome);
-	void setTelefone(string telefone);
-	void setDataInicio(string dataInicio);
-	void setDataFim(string dataFim);
-
+	void setEndereco(std::string endereco);
+	void setNome(std::string nome);
+	void setTelefone(std::string telefone);
+	void setDataInicio(std::string dataInicio);
+	void setDataFim(std::string dataFim);
+	void imprimirDados();
 	// GETTERS (Retornar informação dos atributos da classe)
-	string getID();
-	string getEndereco();
-	string getNome();
-	string getTelefone();
-	string getDataInicio();
-	string getDataFim();
+	std::string getEndereco();
+	std::string getNome();
+	std::string getTelefone();
+	std::string getDataInicio();
+	std::string getDataFim();
 };
 
 #endif

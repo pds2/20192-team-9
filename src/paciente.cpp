@@ -1,19 +1,23 @@
 #include "paciente.h"
 
 // (PACIENTE) CONSTRUTORES E DESTRUTORES
-Paciente::Paciente()
+Paciente::Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
 	:
-	psicologoResponsavel(""),
-	queixa(""),
+	Pessoa(nome, endereco, telefone, dataInicio),
+	psicologoResponsavel(" - "),
+	queixa(" - "),
 	mensalidade(0),
-	prontuario("")
+	prontuario(" - ")
 {
+	quantidadePacientes++;
 }
 
-Paciente::Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
-		string pr, string queixa, float mensalidade, string prontuario)
+int Paciente::quantidadePacientes = 0;
+
+Paciente::Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio, 
+		std::string pr, std::string queixa, float mensalidade, std::string prontuario)
 		: 
-		Pessoa(id, nome, endereco, telefone, dataInicio),
+		Pessoa(nome, endereco, telefone, dataInicio),
 		psicologoResponsavel(pr),
 		queixa(queixa),
 		mensalidade(mensalidade),
@@ -22,15 +26,14 @@ Paciente::Paciente(string id, string nome, string endereco, string telefone, str
 }
 
 Paciente::~Paciente(){
-	cout << "Destrutor Paciente" << endl;
-}
+} 
 
 // (PACIENTE) SETTERS (Setar informação dos atributos da classe)
-void Paciente::setPsicologoResponsavel(string pr){
+void Paciente::setPsicologoResponsavel(std::string pr){
 	this->psicologoResponsavel = pr;
 }
 
-void Paciente::setQueixa(string queixa){
+void Paciente::setQueixa(std::string queixa){
 	this->queixa = queixa;
 }
 
@@ -38,16 +41,16 @@ void Paciente::setMensalidade(float mensalidade){
 	this->mensalidade = mensalidade;
 }
 
-void Paciente::setProntuario(string prontuario){
+void Paciente::setProntuario(std::string prontuario){
 	this->prontuario = prontuario;
 }
 
 // GETTERS (Retornar informação dos atributos da classe)
-string Paciente::getPsicologoResponsavel(){
+std::string Paciente::getPsicologoResponsavel(){
 	return this->psicologoResponsavel;
 }
 
-string Paciente::getQueixa(){
+std::string Paciente::getQueixa(){
 	return this->queixa;
 }
 
@@ -55,6 +58,11 @@ float Paciente::getMensalidade(){
 	return this->mensalidade;
 }
 
-string Paciente::getProntuario(){
+std::string Paciente::getProntuario(){
 	return this->prontuario;
-}	
+}
+
+void Paciente::imprimirDados() {
+	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
+	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
+}

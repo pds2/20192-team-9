@@ -5,33 +5,34 @@
 #include <string>
 #include "pessoa.h"
 
-using namespace std;
-
 class Paciente : public Pessoa{
 private:
-	string psicologoResponsavel;
-	string queixa; 
+	std::string psicologoResponsavel;
+	std::string queixa; 
 	float mensalidade;
-	string prontuario;
+	std::string prontuario;
 
 public:
+	static int quantidadePacientes;
 	// CONSTRUTORES E DESTRUTORES
-	Paciente();
-	Paciente(string id, string nome, string endereco, string telefone, string dataInicio, 
-		string pr, string queixa, float mensalidade, string prontuario);
+	Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
+	Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio, 
+		std::string pr, std::string queixa, float mensalidade, std::string prontuario);
 	~Paciente();
 
 	// SETTERS (Setar informação dos atributos da classe)
-	void setPsicologoResponsavel(string pr);
-	void setQueixa(string queixa);
+	void setPsicologoResponsavel(std::string pr);
+	void setQueixa(std::string queixa);
 	void setMensalidade(float mensalidade);
-	void setProntuario(string prontuario);
+	void setProntuario(std::string prontuario);
 
 	// GETTERS (Retornar informação dos atributos da classe)
-	string getPsicologoResponsavel();
-	string getQueixa();
+	std::string getPsicologoResponsavel();
+	std::string getQueixa();
 	float getMensalidade();
-	string getProntuario();
+	std::string getProntuario();
+
+	void imprimirDados();
 };
 
 #endif
