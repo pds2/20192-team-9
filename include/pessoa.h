@@ -8,7 +8,8 @@ using namespace std;
 
 class Pessoa{
 protected:
-	string ID;
+	int ID;
+	string cpf;
 	string nome;
 	string endereco;
 	string telefone;

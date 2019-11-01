@@ -10,10 +10,18 @@ Psicologo::Psicologo(
 
 Psicologo::~Psicologo(){}
 
-void Psicologo::imprimirDados(){}
+void Psicologo::imprimirDados(){
 
-void Psicologo::setProntuarioPaciente(){}
+}
 
-void Psicologo::setNumeroCRP(std::string numeroCRP){}
+void Psicologo::setProntuarioPaciente(){
 
-std::string Psicologo::getNumeroCRP(){}
+}
+
+void Psicologo::setNumeroCRP(std::string numeroCRP){
+	this->numeroCRP=numeroCRP;
+}
+
+std::string Psicologo::getNumeroCRP(){
+	return this->numeroCRP;
+}
