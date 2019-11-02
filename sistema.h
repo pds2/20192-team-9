@@ -5,21 +5,19 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <map>
 #include "secretaria.h"
 #include "paciente.h"
 #include "pessoa.h"
 
-
-class Sistema {
-private:
-    std::vector<Paciente> pacientes;
+class Sistema {  
 public:
     Sistema();
-    void limparTela();
-    void imprimirPacientes();
-    void mostrarOpcoes(std::string frases[]);		// Funcao para facilitar a exbicao de mensagens
-    void paginaInicial();
-    void cadastrar(std::string tipo);               //Instancia objetos e salva em arquivo txt
-    void ambienteSecretaria();
+    ~Sistema();
+    static void limparTela();
+    static void mostrarOpcoes(std::vector<std::string> opcoes);		// Funcao para facilitar a exbicao de mensagens
+    int paginaInicial();
+    std::vector<std::string> preencher(std::vector<std::string> campos);
+    void salvar(std::vector<std::string> dados, std::string arquivo);
     void marcarConsulta();
 };

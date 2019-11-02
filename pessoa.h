@@ -11,9 +11,8 @@ protected:
 	std::string telefone;
 	std::string dataInicio;
 	std::string dataFim;
-
 public:
-
+	std::string nomeClasse;
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
 	Pessoa(std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
@@ -25,13 +24,15 @@ public:
 	void setTelefone(std::string telefone);
 	void setDataInicio(std::string dataInicio);
 	void setDataFim(std::string dataFim);
-	void imprimirDados();
+	virtual void imprimirDados() = 0;
+
 	// GETTERS (Retornar informação dos atributos da classe)
 	std::string getEndereco();
 	std::string getNome();
 	std::string getTelefone();
 	std::string getDataInicio();
 	std::string getDataFim();
+	
 };
 
 #endif

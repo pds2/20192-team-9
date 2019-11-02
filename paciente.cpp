@@ -9,10 +9,18 @@ Paciente::Paciente(std::string nome, std::string endereco, std::string telefone,
 	mensalidade(0),
 	prontuario(" - ")
 {
-	quantidadePacientes++;
+	quantidade++;
 }
 
-int Paciente::quantidadePacientes = 0;
+Paciente::Paciente(std::vector<std::string> dados) 
+	:
+	Paciente(dados[0], dados[1], dados[2], dados[3])
+{
+}
+
+int Paciente::quantidade = 0;
+
+std::string Paciente::nomeClasse = "paciente";
 
 Paciente::Paciente(std::string nome, std::string endereco, std::string telefone, std::string dataInicio, 
 		std::string pr, std::string queixa, float mensalidade, std::string prontuario)
@@ -66,3 +74,7 @@ void Paciente::imprimirDados() {
 	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
 	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
 }
+
+std::string Paciente::arquivo = "paciente.txt";
+
+std::vector<std::string> Paciente::cadastro = {"Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: "};

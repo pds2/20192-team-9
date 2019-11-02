@@ -45,10 +45,6 @@ void Pessoa::setDataFim(std::string dataFim){
 	this->dataFim = dataFim;
 }
 
-void Pessoa::imprimirDados() {
-	
-}
-
 // (PESSOA) GETTERS (Retornar informação dos atributos da classe)
 std::string Pessoa::getEndereco(){
 	return this->endereco;
