@@ -23,6 +23,27 @@ Sistema::Sistema() {
 	}
 }
 
+void Sistema::logar(){
+	bool flag = false;
+	std::cout << "Bem vindo ao sistema da Clinica Social \n";
+	std::cout << "Para fazer login, favor digitar o CPF: \n";
+	std::string cpf;
+	std::getline (std::cin, cpf);
+
+	for(int i=0; i<this->funcionarios->size();i++){
+		if(cpf==this->funcionarios[i]->getCPF()){
+			this->indice=i;
+			flag=true;
+			break;
+		}
+	}
+	if(!flag){
+		std::cout << "CPF nao encontrado \n";
+		this->logar();
+	}
+}
+
+
 void Sistema::mostrarOpcoes(std::string opcoes[])
 {
 	int i = 0;
