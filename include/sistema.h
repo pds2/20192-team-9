@@ -13,15 +13,24 @@
 #include "funcionario.h"
 
 class Sistema { 
-    int indice;
+    std::map<std::string ,std::vector<Pessoa*>> registro;
+    std::vector<std::string> arquivos = {Paciente::arquivo, Secretaria::arquivo, Psicologo::arquivo};
 public:
     Sistema();
     ~Sistema();
+    // Facilitadores
     static void limparTela();
     static void mostrarOpcoes(std::vector<std::string> opcoes);
-    int paginaInicial();
-    std::vector<std::string> preencher(std::vector<std::string> campos);
+    static std::vector<std::vector<std::string>> lerArquivo(std::string arquivo);
+    static std::vector<std::string> preencher(std::vector<std::string> campos);
+    // Operacoes no sistema
+    void paginaInicial();
     void salvar(std::vector<std::string> dados, std::string arquivo);
-    void iniciar();
     void logar();
+    void sair();
+    void ambienteSecretaria();
+    void ambientePsicologo();
+    template<typename T> void cadastrar();
+    template<typename T> void excluir();
+    template<typename T> void imprimir();
 };
