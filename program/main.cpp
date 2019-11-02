@@ -1,5 +1,6 @@
 #include "sistema.h"
 #include "usuarioSecretaria.h"
+#include "psicologo.h"
 //#include "usuarioPsicologo.h"
 
 int main() {

@@ -9,15 +9,19 @@
 #include "secretaria.h"
 #include "paciente.h"
 #include "pessoa.h"
+#include "psicologo.h"
+#include "funcionario.h"
 
-class Sistema {  
+class Sistema { 
+    int indice;
 public:
     Sistema();
     ~Sistema();
     static void limparTela();
-    static void mostrarOpcoes(std::vector<std::string> opcoes);		// Funcao para facilitar a exbicao de mensagens
+    static void mostrarOpcoes(std::vector<std::string> opcoes);
     int paginaInicial();
     std::vector<std::string> preencher(std::vector<std::string> campos);
     void salvar(std::vector<std::string> dados, std::string arquivo);
-    void marcarConsulta();
+    void iniciar();
+    void logar();
 };

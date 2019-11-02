@@ -1,33 +1,42 @@
-CC=g++
+CC := g++
+SRCDIR := src
+TSTDIR := tests
+OBJDIR := build
+BINDIR := bin
 
+MAIN := program/main.cpp
+TESTER := program/tester.cpp
 
-CFLAGS=-c -Wall -std=c++11
+SRCEXT := cpp
+SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+TSTSOURCES := $(shell find $(TSTDIR) -type f -name *.$(SRCEXT))
 
-all: run
+CFLAGS := -g -Wall -O3 -std=c++11
+INC := -I include/ -I third_party/
 
-run: main.o usuarioSecretaria.o sistema.o pessoa.o paciente.o agenda.o 
-	$(CC) main.o pessoa.o paciente.o agenda.o usuarioSecretaria.o  sistema.o -o sistemaClinica
+$(OBJDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+main: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(MAIN) $^ -o $(BINDIR)/main
 
-sistema.o: sistema.cpp
-	$(CC) $(CFLAGS) sistema.cpp
+tests: $(OBJECTS)
+	@mkdir -p $(BINDIR)
+	$(CC) $(CFLAGS) $(INC) $(TESTER) $(TSTSOURCES) $^ -o $(BINDIR)/tester
+	$(BINDIR)/tester
 
-pessoa.o: pessoa.cpp
-	$(CC) $(CFLAGS) pessoa.cpp
+valgrind: main
+	valgrind --leak-check=full --track-origins=yes $(BINDIR)/main
 
-paciente.o: paciente.cpp
-	$(CC) $(CFLAGS) paciente.cpp
+all: main
 
-agenda.o: agenda.cpp
-	$(CC) $(CFLAGS) agenda.cpp
+run: main
+	$(BINDIR)/main
 
-usuarioSecretaria.o: usuarioSecretaria.cpp
-	$(CC) $(CFLAGS) usuarioSecretaria.cpp
+clean:
+	$(RM) -r $(OBJDIR)/* $(BINDIR)/*
 
-usuarioPsicologo.o: usuarioPsicologo.cpp
-	$(CC) $(CFLAGS) usuarioPsicologo.cpp
-
-clean: 
-	rm *.o *.txt sistemaClinica
+.PHONY: clean coverage

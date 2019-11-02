@@ -7,6 +7,7 @@ Sistema::~Sistema() {}
 
 int Sistema::paginaInicial() {
 	int entrada;
+	logar();
 	while (true) {
 		Sistema::limparTela();
 		Sistema::mostrarOpcoes({"Entrar como Secretaria","Entrar como Psicologo","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
@@ -32,7 +33,30 @@ int Sistema::paginaInicial() {
 	
 }
 
-void Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
+void Sistema::logar(){
+	bool flag = false;
+	while(!flag){
+		std::cout << "Bem vindo ao sistema da Clinica Social \n";
+		std::cout << "Para fazer login, favor digitar o CPF: \n";
+		std::string cpf;
+		std::getline (std::cin, cpf);
+
+		for(int i=0; i<this->pessoas["secretaria"]->size();i++){
+			if(cpf==this->pessoas[i]->getCPF()){
+				this->indice=i;
+				flag=true;
+				break;
+			}
+		}
+		if(!flag){
+			std::cout << "CPF nao encontrado \n";
+			this->logar();
+		}
+	}
+}
+
+
+void Sistema::mostrarOpcoes(std::string opcoes[])
 {
 	int i = 1;
 	for(std::vector<std::string>::iterator it = opcoes.begin() ; it != opcoes.end(); it++) {
