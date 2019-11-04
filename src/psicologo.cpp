@@ -6,6 +6,7 @@ Psicologo::Psicologo(std::string CPF, std::string nome, std::string endereco, st
 	CRP(CRP)
 { 
 	this->agenda = new Agenda();
+	quantidade++;
 }
 
 Psicologo::Psicologo(std::vector<std::string> psicologoDados) 
@@ -51,7 +52,7 @@ Agenda* Psicologo::getAgenda(){
 }
 */
 void Psicologo::imprimirDados() {
-
+	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " << CRP << "|" << std::endl;
 }
 
 std::vector<std::string> Psicologo::cadastro = {"CPF: ", "Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: ", "Numero CRP: "};
@@ -59,3 +60,7 @@ std::vector<std::string> Psicologo::cadastro = {"CPF: ", "Nome: ", "Endereco: ",
 std::string Psicologo::nomeClasse = "psicologo";
 
 std::string Psicologo::arquivo = "psicologo.txt";
+
+std::vector<std::string> Psicologo::dados = {"Nome", "Endereco", "Telefone", "Data Inicio", "Data Fim", "CRP"};
+
+int Psicologo::quantidade;

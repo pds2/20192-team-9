@@ -34,4 +34,5 @@ public:
     template<typename T> void cadastrar();
     template<typename T> void excluir();
     template<typename T> void imprimir();
+    template <typename T> void carregar(std::vector<std::vector<std::string>> data);
 };

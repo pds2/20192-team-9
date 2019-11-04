@@ -4,10 +4,20 @@
 Sistema::Sistema() 
 {
 	std::vector<std::vector<std::string>> pacientesData = lerArquivo("paciente.txt");
+	carregar<Paciente>(pacientesData);
+	std::vector<std::vector<std::string>> secretariaData = lerArquivo("secretaria.txt");
+	carregar<Secretaria>(secretariaData);
+	std::vector<std::vector<std::string>> psicologoData = lerArquivo("psicologo.txt");
+	carregar<Psicologo>(psicologoData);
+	
+}
+
+template <typename T>
+void Sistema::carregar(std::vector<std::vector<std::string>> data) {
 	std::vector<std::vector<std::string>>::iterator itr;
-	for(itr = pacientesData.begin(); itr != pacientesData.end(); itr++) {
-		std::vector<std::string> pacienteData = *itr;
-		registro[Paciente::nomeClasse].push_back(new Paciente(pacienteData));
+	for(itr = data.begin(); itr != data.end(); itr++) {
+		std::vector<std::string> data = *itr;
+		registro[T::nomeClasse].push_back(new T(data));
 	}
 }
 
@@ -38,7 +48,7 @@ void Sistema::paginaInicial()
 {
 	while (true) {
 		limparTela();
-		int e = mostrarOpcoes({"Fazer Login","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
+		int e = mostrarOpcoes({"Fazer Login","Cadastrar Secretaria","Cadastrar Psicologo","Visualizar Secretarias", "Visualizar Psicologos","Sair Do Programa"});
 		if (e == 1) {
 			logar();
 		} else if (e == 2) {
@@ -46,6 +56,10 @@ void Sistema::paginaInicial()
 		} else if (e == 3) {
 			cadastrar<Psicologo>();
 		} else if (e == 4) {
+			imprimir<Secretaria>();
+		} else if (e == 5) {
+			imprimir<Psicologo>();
+		} else if (e == 6) {
 			sair();
 			break;
 		}
@@ -146,7 +160,11 @@ void Sistema::imprimir()
     while(true) {
 		limparTela();
 		std::vector<Pessoa*> pessoas = registro[T::nomeClasse];
-		std::cout << "Nome|" << "Endereco|" << "Telefone|" << "Data de Entrada|" << "Data de Saida|" << "Psicologo Responsavel|" << "Queixa|" << "Mensalidade" << std::endl;
+		std::vector<std::string>::iterator itr;
+		for(itr = T::dados.begin(); itr != T::dados.end(); itr++) {
+			std::cout << *itr << "|";
+		} 
+		std::cout << std::endl;
 		std::cout << "=============================================================================================" << std::endl;
 		if(pessoas.size() == 0) {
 			std::cout << "Nenhum " << T::nomeClasse << " Cadastrado" << std::endl;
@@ -160,7 +178,7 @@ void Sistema::imprimir()
 		std::cout << "Total de " << T::nomeClasse << "s : " << T::quantidade << std::endl;
 
 		
-		int e = mostrarOpcoes({"Limpar Pacientes", "Voltar"});
+		int e = mostrarOpcoes({"Limpar " + T::nomeClasse + "s", "Voltar"});
 		if(e == 1) {
 			excluir<T>();
 		} else if(e == 2) {

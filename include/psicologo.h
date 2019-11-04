@@ -33,8 +33,9 @@ class Psicologo : public Pessoa, public Funcionario {
 		// GETTERS
 		std::string getCRP();
 		Agenda* getAgenda();
-
+		static int quantidade;
 		static std::vector<std::string> cadastro;
 		static std::string nomeClasse;
 		static std::string arquivo;
+		static std::vector<std::string> dados;
 };

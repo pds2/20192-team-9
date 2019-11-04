@@ -23,10 +23,11 @@ class Secretaria : public Pessoa, public Funcionario {
 
 		void desmarcarConsulta(std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora) override;
 		*/
-
+		static int quantidade;
 		static std::vector<std::string> cadastro;
 		static std::string nomeClasse;
 		static std::string arquivo;
+		static std::vector<std::string> dados;
 };
 
 #endif

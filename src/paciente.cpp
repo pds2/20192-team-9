@@ -20,6 +20,8 @@ int Paciente::quantidade = 0;
 
 std::string Paciente::nomeClasse = "paciente";
 
+std::vector<std::string> Paciente::dados = {"Nome", "Endereco", "Telefone", "Data Inicio", "Data Fim", "Psicologo Responsavel", "Queixa", "Mensalidade"};
+
 Paciente::~Paciente(){
 } 
 

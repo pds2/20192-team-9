@@ -13,7 +13,6 @@ protected:
 	std::string dataInicio;
 	std::string dataFim;
 public:
-	std::string nomeClasse;
 	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
 	Pessoa();
 	Pessoa(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);

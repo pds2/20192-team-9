@@ -4,6 +4,7 @@ Secretaria::Secretaria(std::string CPF, std::string nome, std::string endereco, 
     :
     Pessoa(CPF, nome, endereco, telefone, dataInicio)
 {
+    quantidade++;
 }
 
 Secretaria::Secretaria(std::vector<std::string> secretariaDados) 
@@ -13,7 +14,7 @@ Secretaria::Secretaria(std::vector<std::string> secretariaDados)
 }
 
 void Secretaria::imprimirDados() {
-
+    std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " << std::endl;
 }
 
 std::vector<std::string> Secretaria::cadastro = {"CPF: ","Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: "};
@@ -21,3 +22,7 @@ std::vector<std::string> Secretaria::cadastro = {"CPF: ","Nome: ", "Endereco: ",
 std::string Secretaria::nomeClasse = "secretaria";
 
 std::string Secretaria::arquivo = "secretaria.txt";
+
+std::vector<std::string> Secretaria::dados = {"Nome", "Endereco", "Telefone", "Data Inicio", "Data Fim"};
+
+int Secretaria::quantidade = 0;
