@@ -13,7 +13,7 @@ class Secretaria : public Pessoa, public Funcionario {
 		Secretaria(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
 		Secretaria(std::vector<std::string> secretariaDados);
 		~Secretaria();
-
+		std::string getCPF();
 		void imprimirDados();
 		//Consultar os pacientes do dia do psicologo selecionado
 		/*

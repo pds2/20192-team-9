@@ -38,22 +38,18 @@ void Sistema::paginaInicial()
 {
 	int entrada;
 	Sistema::limparTela();
-	logar();
 	while (true) {
 		Sistema::limparTela();
-		Sistema::mostrarOpcoes({"Entrar como Secretaria","Entrar como Psicologo","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
+		Sistema::mostrarOpcoes({"Fazer Login","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
 
 		std::cin >> entrada;
-		Sistema::limparTela();
 		if (entrada == 1) {
-			ambienteSecretaria();
+			logar();
 		} else if (entrada == 2) {
-			ambientePsicologo();
-		} else if (entrada == 3) {
 			cadastrar<Secretaria>();
-		} else if (entrada == 4) {
+		} else if (entrada == 3) {
 			cadastrar<Psicologo>();
-		} else if (entrada == 5) {
+		} else if (entrada == 4) {
 			sair();
 			break;
 		}
@@ -62,6 +58,7 @@ void Sistema::paginaInicial()
 
 void Sistema::sair() 
 {
+	limparTela();
 	std::cout << "Obrigado por usar nosso programa!" << std::endl;
 	std::cin.get();
 }
@@ -72,7 +69,6 @@ void Sistema::ambienteSecretaria() {
 		limparTela();
 		mostrarOpcoes({"Visualizar Pacientes","Marcar Consulta","Cadastrar Pacientes", "Voltar para Pagina Inicial"});
 		std::cin >> entrada;
-		limparTela();
 		if (entrada == 1) {
 			imprimir<Paciente>();
 		} else if (entrada == 2) {
@@ -100,6 +96,7 @@ void Sistema::excluir()
 
 template <typename T>
 void Sistema::cadastrar() {
+	limparTela();
 	std::vector<std::string> dados = preencher(T::cadastro);
 	salvar(dados, T::arquivo);
 	registro[T::nomeClasse].push_back(new T(dados));
@@ -109,26 +106,46 @@ void Sistema::cadastrar() {
 
 void Sistema::logar() 
 {
-	bool flag = false;
-	while(!flag){
+	bool flag = true;
+	while(flag){
+		limparTela();
 		std::cout << "Bem vindo ao sistema da Clinica Social \n";
 		std::cout << "Para fazer login, favor digitar o CPF: \n";
 		std::string cpf;
+		std::cin.ignore();
 		std::getline (std::cin, cpf);
 
-		/*for(int i=0; i<this->pessoas["secretaria"]->size();i++){
-			if(cpf==this->pessoas[i]->getCPF()){
-				this->indice=i;
-				flag=true;
-				break;
+		if (isCadastrado(cpf, "secretaria")) {
+			ambienteSecretaria();
+			break;
+		}
+		else if (isCadastrado(cpf, "psicologo")) {
+			ambientePsicologo();
+			break;
+		}
+		else {
+			int entrada;
+			limparTela();
+			std::cout << "CPF nao encontrado! \n";
+			mostrarOpcoes({"Tentar novamente", "Voltar"});
+			std::cin >> entrada;
+			if (entrada == 2) {
+				flag = false;
 			}
 		}
-		if(!flag){
-			std::cout << "CPF nao encontrado \n";
-			this->logar();
-		}*/
-		flag = true;
 	}
+}
+
+bool Sistema::isCadastrado(std::string cpf, std::string funcionario) {
+	std::vector<Pessoa*>::iterator itr;
+	std::vector<Pessoa*> pessoas = registro[funcionario];
+	for(itr = pessoas.begin(); itr != pessoas.end(); itr++) {
+		Pessoa* pessoa = *itr;
+		if(cpf == pessoa->getCPF()) {
+			return true;
+		}
+	}
+	return false;
 }
 
 
@@ -136,6 +153,7 @@ template <typename T>
 void Sistema::imprimir() 
 {
     while(true) {
+		limparTela();
 		std::vector<Pessoa*> pessoas = registro[T::nomeClasse];
 		std::cout << "Nome|" << "Endereco|" << "Telefone|" << "Data de Entrada|" << "Data de Saida|" << "Psicologo Responsavel|" << "Queixa|" << "Mensalidade" << std::endl;
 		std::cout << "=============================================================================================" << std::endl;
@@ -156,7 +174,6 @@ void Sistema::imprimir()
 		std::cin.ignore();
 		std::cin >> entrada;
 		if(entrada == 1) {
-			limparTela();
 			excluir<T>();
 		} else if(entrada == 2) {
 			break;

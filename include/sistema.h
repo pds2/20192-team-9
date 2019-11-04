@@ -25,6 +25,7 @@ public:
     static std::vector<std::string> preencher(std::vector<std::string> campos);
     // Operacoes no sistema
     void paginaInicial();
+    bool isCadastrado(std::string cpf, std::string funcionario);
     void salvar(std::vector<std::string> dados, std::string arquivo);
     void logar();
     void sair();
