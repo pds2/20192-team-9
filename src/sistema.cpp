@@ -36,20 +36,16 @@ Sistema::~Sistema() {}
 
 void Sistema::paginaInicial() 
 {
-	int entrada;
-	Sistema::limparTela();
 	while (true) {
-		Sistema::limparTela();
-		Sistema::mostrarOpcoes({"Fazer Login","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
-
-		std::cin >> entrada;
-		if (entrada == 1) {
+		limparTela();
+		int e = mostrarOpcoes({"Fazer Login","Cadastrar Secretaria","Cadastrar Psicologo","Sair Do Programa"});
+		if (e == 1) {
 			logar();
-		} else if (entrada == 2) {
+		} else if (e == 2) {
 			cadastrar<Secretaria>();
-		} else if (entrada == 3) {
+		} else if (e == 3) {
 			cadastrar<Psicologo>();
-		} else if (entrada == 4) {
+		} else if (e == 4) {
 			sair();
 			break;
 		}
@@ -59,23 +55,21 @@ void Sistema::paginaInicial()
 void Sistema::sair() 
 {
 	limparTela();
-	std::cout << "Obrigado por usar nosso programa!" << std::endl;
+	std::cout << "Obrigado por usar nosso programa!";
 	std::cin.get();
 }
 
 void Sistema::ambienteSecretaria() {
-	int entrada;
 	while(true) {
 		limparTela();
-		mostrarOpcoes({"Visualizar Pacientes","Marcar Consulta","Cadastrar Pacientes", "Voltar para Pagina Inicial"});
-		std::cin >> entrada;
-		if (entrada == 1) {
+		int e = mostrarOpcoes({"Visualizar Pacientes","Marcar Consulta","Cadastrar Pacientes", "Voltar para Pagina Inicial"});
+		if (e == 1) {
 			imprimir<Paciente>();
-		} else if (entrada == 2) {
+		} else if (e == 2) {
 			//marcarConsulta();
-		} else if (entrada == 3) {
+		} else if (e == 3) {
 			cadastrar<Paciente>();
-		} else if (entrada == 4) 
+		} else if (e == 4) 
 			break;
 	}
 }
@@ -112,8 +106,7 @@ void Sistema::logar()
 		std::cout << "Bem vindo ao sistema da Clinica Social \n";
 		std::cout << "Para fazer login, favor digitar o CPF: \n";
 		std::string cpf;
-		std::cin.ignore();
-		std::getline (std::cin, cpf);
+		std::getline(std::cin, cpf);
 
 		if (isCadastrado(cpf, "secretaria")) {
 			ambienteSecretaria();
@@ -124,12 +117,10 @@ void Sistema::logar()
 			break;
 		}
 		else {
-			int entrada;
 			limparTela();
 			std::cout << "CPF nao encontrado! \n";
-			mostrarOpcoes({"Tentar novamente", "Voltar"});
-			std::cin >> entrada;
-			if (entrada == 2) {
+			int e = mostrarOpcoes({"Tentar novamente", "Voltar"});
+			if (e == 2) {
 				flag = false;
 			}
 		}
@@ -168,26 +159,34 @@ void Sistema::imprimir()
 		std::cout << "=============================================================================================" << std::endl;
 		std::cout << "Total de " << T::nomeClasse << "s : " << T::quantidade << std::endl;
 
-		mostrarOpcoes({"Limpar Pacientes", "Voltar"});
 		
-		int entrada;
-		std::cin.ignore();
-		std::cin >> entrada;
-		if(entrada == 1) {
+		int e = mostrarOpcoes({"Limpar Pacientes", "Voltar"});
+		if(e == 1) {
 			excluir<T>();
-		} else if(entrada == 2) {
+		} else if(e == 2) {
 			break;
 		}
 	}
 }
 
-void Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
+int Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
 {
 	int i = 1;
+	int e;
+	std::string entrada;
 	for(std::vector<std::string>::iterator it = opcoes.begin() ; it != opcoes.end(); it++) {
 		std::cout << i << ". " << *it << std::endl;
 		i++;
 	}
+	getline(std::cin,entrada);
+	try {
+		e = std::stoi(entrada);
+	} catch (std::invalid_argument) {
+		std::cout << "Entrada invalida! Digite um numero" << std::endl;
+		std::cin.get();
+		return 0;
+	}
+	return e;
 }
 
 void Sistema::limparTela() 
@@ -202,7 +201,6 @@ void Sistema::limparTela()
 std::vector<std::string> Sistema::preencher(std::vector<std::string> campos) 
 {
 	std::cout << "Preencha os campos abaixo" << std::endl;
-	std::cin.ignore();
 	std::vector<std::string> dados;
 
 	for(std::vector<int>::size_type i = 0; i != campos.size(); i++) {

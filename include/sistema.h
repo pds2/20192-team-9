@@ -20,7 +20,7 @@ public:
     ~Sistema();
     // Facilitadores
     static void limparTela();
-    static void mostrarOpcoes(std::vector<std::string> opcoes);
+    static int mostrarOpcoes(std::vector<std::string> opcoes);
     static std::vector<std::vector<std::string>> lerArquivo(std::string arquivo);
     static std::vector<std::string> preencher(std::vector<std::string> campos);
     // Operacoes no sistema
