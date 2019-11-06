@@ -1,34 +1,35 @@
 #ifndef AGENDA_H_
 #define AGENDA_H_
 
-#include <string>
+#include "data.h"
 #include <iostream>
-#include <stdbool.h>
+#include "paciente.h"
+#include <string> 
+#include 
 
-struct Data_consulta
+struct Consulta 
 {
-	int min, hora, dia, mes, ano;
+	Consulta *proximo;
+	Consulta *anterior;
+	Data data;
+	Hora hora;
+	std::string paciente;
+	std::string id = "";
 };
 
-struct Node
+class Agenda
 {
-	std::string nome;
-	Data_consulta data;
-	Node *proximo;
-	Node *anterior;
-
-};
-
-struct Agenda
-{
-	Node *inicio;
-	Node *fim;
+	Consulta *inicio;
+	Consulta *proxConsulta;
+	Consulta *fim;
 	Agenda();
 	~Agenda();
-	void marcar_consulta();
-	void desmarcar_consulta(std::string paciente);
-	void get_consulta(std::string paciente);
+	std::strig consultarAgendaDia(int dia, int mes, int ano);
+	std::string proximaConsulta();
+	void adicionarConsulta(std::string paciente, int dia, int mes, int ano, int hora, int min);
+	void desmarcarConsulta(int dia, int mes, int ano, int hora, int min);
+	void desmarcarConsulta(std::string id);
+	void fimConsulta();
 };
-
 
 #endif
