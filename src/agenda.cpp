@@ -141,7 +141,7 @@ void Agenda::desmarcarConsulta(std::string id)
 std::string Agenda::proximaConsulta()
 {
 	//cria uma string que sera o retorno do metodo
-	std::string retorna = ""
+	std::string retorna = "";
 	//preenche a string com as informacoes da proxima consulta
 	retorna += this -> proxConsulta -> paciente;
 	retorna += "	no dia ";
@@ -150,7 +150,7 @@ std::string Agenda::proximaConsulta()
 	retorna += std::to_string(this -> proxConsulta ->data.mes)
 	retorna += "/";
 	retorna += std::to_string(this -> proxConsulta ->data.ano)
-	retorna += "	às ";
+	retorna += "	as ";
 	retorna += std::to_string(this -> proxConsulta -> hora.hora);
 	retorna += "h";
 	retorna += std::to_string(this -> proxConsulta -> hora.min);
@@ -159,7 +159,7 @@ std::string Agenda::proximaConsulta()
 	return retorna;
 }
 
-std::strig Agenda::consultarAgendaDia(int dia, int mes, int ano)
+std::string Agenda::consultarAgendaDia(int dia, int mes, int ano)
 {
 	//cria duas strings auxiliares que contem o menor id possivel do dia passado e o maior id possivel do dia passado. 
 	std::string menorDia = "";
@@ -167,7 +167,7 @@ std::strig Agenda::consultarAgendaDia(int dia, int mes, int ano)
 	//cria a string que sera retornada.
 	std::string retorna = "";
 	//cria ponteiro auxiliar para percorrer a Agenda
-	Consulta *percorrer = this -> hoje;
+	Consulta *percorrer = this -> proxConsulta;
 
 	//preenche as strings menorDia e maiorDia
 	menorDia += std::to_string(ano);
@@ -202,7 +202,7 @@ std::strig Agenda::consultarAgendaDia(int dia, int mes, int ano)
 	while(percorrer -> id <= maiorDia)
 	{
 		retorna += percorrer -> paciente;
-		retorna += "	às ";
+		retorna += "	as ";
 		retorna += std::to_string(percorrer -> hora.hora);
 		retorna += "h";
 		retorna += std::to_string(percorrer -> hora.min);
@@ -218,117 +218,3 @@ void Agenda::fimConsulta()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-std::string Agenda::consultarAgendaDia(Data data)
-{
-	
-	int contador=0;
-
-	Consulta *aux = this->atual;
-
-	while (aux->data.ano != data.ano)
-	{
-		aux=aux->proximo;
-	}
-	while (aux->data.mes != data.mes)
-	{
-		aux=aux->proximo;
-	}
-	while (aux->data.dia != data.dia)
-	{
-		aux=aux->proximo;
-	}
-	//cheguei nas consultas do dia passado como parametro
-	while (aux->data.dia == data.dia)
-	{
-		contador++;
-	}
-
-}
