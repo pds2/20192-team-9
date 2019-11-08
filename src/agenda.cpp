@@ -147,9 +147,9 @@ std::string Agenda::proximaConsulta()
 	retorna += "	no dia ";
 	retorna += std::to_string(this -> proxConsulta ->data.dia);
 	retorna += "/";
-	retorna += std::to_string(this -> proxConsulta ->data.mes)
+	retorna += std::to_string(this -> proxConsulta ->data.mes);
 	retorna += "/";
-	retorna += std::to_string(this -> proxConsulta ->data.ano)
+	retorna += std::to_string(this -> proxConsulta ->data.ano);
 	retorna += "	as ";
 	retorna += std::to_string(this -> proxConsulta -> hora.hora);
 	retorna += "h";
