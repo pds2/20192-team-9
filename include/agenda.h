@@ -24,7 +24,7 @@ class Agenda
 	Consulta *fim;
 	Agenda();
 	~Agenda();
-	std::strig consultarAgendaDia(int dia, int mes, int ano);
+	std::string consultarAgendaDia(int dia, int mes, int ano);
 	std::string proximaConsulta();
 	void adicionarConsulta(std::string paciente, int dia, int mes, int ano, int hora, int min);
 	void desmarcarConsulta(int dia, int mes, int ano, int hora, int min);
