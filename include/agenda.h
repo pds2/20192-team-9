@@ -5,6 +5,10 @@
 #include <iostream>
 #include "paciente.h"
 #include <string> 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2a5206d6c377a25de0d0f0a7ef78a0813cc02369
 
 struct Consulta 
 {
