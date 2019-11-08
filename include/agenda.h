@@ -5,7 +5,6 @@
 #include <iostream>
 #include "paciente.h"
 #include <string> 
-#include 
 
 struct Consulta 
 {
@@ -22,6 +21,7 @@ class Agenda
 	Consulta *inicio;
 	Consulta *proxConsulta;
 	Consulta *fim;
+	public:
 	Agenda();
 	~Agenda();
 	std::string consultarAgendaDia(int dia, int mes, int ano);
