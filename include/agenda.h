@@ -1,36 +1,35 @@
 #ifndef AGENDA_H_
 #define AGENDA_H_
 
-#include "data.h"
 #include <iostream>
-#include "paciente.h"
 #include <string> 
+#include "horario.h"
 
-
-struct Consulta 
+struct Consulta
 {
-	Consulta *proximo;
-	Consulta *anterior;
+	Horario horario[5];
 	Data data;
-	Hora hora;
-	std::string paciente;
-	std::string id = "";
+	std::string id="";
+	Consulta *proximo = nullptr;
+	Consulta *anterior = nullptr;
 };
 
 class Agenda
 {
-	Consulta *inicio;
-	Consulta *proxConsulta;
-	Consulta *fim;
 	public:
-	Agenda();
-	~Agenda();
-	std::string consultarAgendaDia(int dia, int mes, int ano);
-	std::string proximaConsulta();
-	void adicionarConsulta(std::string paciente, int dia, int mes, int ano, int hora, int min);
-	void desmarcarConsulta(int dia, int mes, int ano, int hora, int min);
-	void desmarcarConsulta(std::string id);
-	void fimConsulta();
+		Agenda();
+		~Agenda();
+		void adicionarConsulta(std::string paciente, int dia, int mes, int ano, int hora);
+		void desmarcarConsulta(std::string paciente, int dia, int mes, int ano);
+		std::string consultarAgendaDia(int dia, int mes, int ano);
+		std::string horarioDisponivel(int dia, int mes, int ano);
+		void fimConsulta();
+
+	protected:
+		Consulta *inicio = nullptr;
+		Consulta *proxConsulta = nullptr;
+		Consulta *fim = nullptr;
+		int hora[5];
 };
 
 #endif
