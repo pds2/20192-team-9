@@ -90,6 +90,18 @@ void Sistema::ambienteSecretaria() {
 
 
 void Sistema::ambientePsicologo() {
+while(true) {
+		limparTela();
+		int e = mostrarOpcoes({"Consultar Agenda","Escrever Prontuario", "Consultar Prontuario","Voltar para Pagina Inicial"});
+		if (e == 1) {
+			//consultarAgenda();
+		} else if (e == 2) {
+			//escrever_prontuario();
+		} else if (e == 3) {
+			//consultar_prontuario();
+		}else if (e == 4) 
+			break;
+	}
 
 }
 
