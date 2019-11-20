@@ -96,13 +96,29 @@ while(true) {
 		if (e == 1) {
 			//consultarAgenda();
 		} else if (e == 2) {
-			//escrever_prontuario();
+			escreverProntuario();
 		} else if (e == 3) {
 			//consultar_prontuario();
 		}else if (e == 4) 
 			break;
 	}
+}
 
+void Sistema::escreverProntuario() {
+	std::cout << "Informe CPF:" << std::endl;
+	std::string cpf;
+	std::cin >> cpf;
+	std::vector<Pessoa*> pacientes = registro["paciente"];
+	for(std::vector<Pessoa*>::iterator itr = pacientes.begin(); itr != pacientes.end(); itr++) {
+		Paciente* p = dynamic_cast<Paciente*>(*itr);
+		if( p->getCPF() == cpf ) {
+			limparTela();
+			std::cout << "Digite o prontuario" << std::endl;
+			std::string queixa;
+			std::cin >> queixa;
+			p->setQueixa(queixa);
+		}
+	}
 }
 
 template<typename T>

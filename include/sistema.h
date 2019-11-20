@@ -31,6 +31,7 @@ public:
     void sair();
     void ambienteSecretaria();
     void ambientePsicologo();
+    void escreverProntuario();
     template<typename T> void cadastrar();
     template<typename T> void excluir();
     template<typename T> void imprimir();

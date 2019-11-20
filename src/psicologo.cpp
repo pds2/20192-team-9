@@ -5,7 +5,7 @@ Psicologo::Psicologo(std::string CPF, std::string nome, std::string endereco, st
 	Pessoa(CPF, nome, endereco, telefone, dataInicio), 
 	CRP(CRP)
 { 
-	this->agenda = new Agenda();
+	//this->agenda = new Agenda();
 	quantidade++;
 }
 
