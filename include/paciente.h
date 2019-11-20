@@ -22,7 +22,7 @@ public:
 
 	// SETTERS (Setar informação dos atributos da classe)
 	void setPsicologoResponsavel(std::string pr);
-	void setQueixa(std::string queixa);
+	void setInformacao(std::string inf) override;
 	
 	// GETTERS (Retornar informação dos atributos da classe)
 	void getInformacoes();

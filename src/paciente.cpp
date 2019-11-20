@@ -30,11 +30,6 @@ void Paciente::setPsicologoResponsavel(std::string pr){
 	this->psicologoResponsavel = pr;
 }
 
-void Paciente::setQueixa(std::string queixa){
-	this->queixa = queixa;
-}
-
-
 // GETTERS (Retornar informação dos atributos da classe)
 std::string Paciente::getPsicologoResponsavel(){
 	return this->psicologoResponsavel;
@@ -54,6 +49,10 @@ void Paciente::addEntrada(std::string CRP, std::string entrada){
 void Paciente::imprimirDados() {
 	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
 	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
+}
+
+void Paciente::setInformacao(std::string inf) {
+	this->queixa = inf;
 }
 
 std::string Paciente::arquivo = "paciente.txt";

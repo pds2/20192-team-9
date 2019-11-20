@@ -110,13 +110,13 @@ void Sistema::escreverProntuario() {
 	std::cin >> cpf;
 	std::vector<Pessoa*> pacientes = registro["paciente"];
 	for(std::vector<Pessoa*>::iterator itr = pacientes.begin(); itr != pacientes.end(); itr++) {
-		Paciente* p = dynamic_cast<Paciente*>(*itr);
+		Pessoa *p = (*itr);
 		if( p->getCPF() == cpf ) {
 			limparTela();
 			std::cout << "Digite o prontuario" << std::endl;
 			std::string queixa;
 			std::cin >> queixa;
-			p->setQueixa(queixa);
+			p->setInformacao(queixa);
 		}
 	}
 }

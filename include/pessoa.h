@@ -25,6 +25,7 @@ public:
 	void setTelefone(std::string telefone);
 	void setDataInicio(std::string dataInicio);
 	void setDataFim(std::string dataFim);
+	virtual void setInformacao(std::string inf) {}
 	virtual void imprimirDados() = 0;
 
 	// GETTERS (Retornar informação dos atributos da classe)
