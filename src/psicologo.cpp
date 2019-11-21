@@ -1,66 +1,59 @@
 #include "psicologo.h"
 
-Psicologo::Psicologo(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio, std::string CRP) 
+Psicologo::Psicologo(std::string cpf, std::string nome, std::string endereco, std::string telefone, std::string dataInicio, std::string crp, std::string inicioExpediente, std::string fimExpediente) 
 	:
-	Pessoa(CPF, nome, endereco, telefone, dataInicio), 
-	CRP(CRP)
-{ 
-	//this->agenda = new Agenda();
-	quantidade++;
+	Pessoa(cpf, nome, endereco, telefone, dataInicio)
+{
+	if(!isNumero(crp))
+		throw std::invalid_argument("CRP Invalido! Digite apenas numeros");
+	this->_crp = crp;
+
+	int inicio, fim;
+	if(!isNumero(inicioExpediente) || !isNumero(fimExpediente))
+		throw std::invalid_argument("Hora Invalida! Digite apenas numeros");
+	std::istringstream iniciostream(inicioExpediente);
+	std::istringstream fimstream(fimExpediente);
+	iniciostream >> inicio;
+	fimstream >> fim;
+
+	agenda = new Agenda(inicio, fim);
 }
 
-Psicologo::Psicologo(std::vector<std::string> psicologoDados) 
+Psicologo::Psicologo(std::vector<std::string> dados) 
 	:
-	Psicologo(psicologoDados[0], psicologoDados[1], psicologoDados[2], psicologoDados[3], psicologoDados[4], psicologoDados[5])
+	Psicologo(dados[0], dados[1], dados[2], dados[3], dados[4], dados[5], dados[6], dados[7])
 {
 }
 
-Psicologo::~Psicologo(){
-	delete this->agenda;
-}
-
-/*
-std::string Psicologo::consultarAgendaDia(){
-	return consultarAgendaDia();
-}
-
-std::string Psicologo::proximaConsulta(){
-	return proximaConsulta();
-}
-
-std::string Psicologo::adicionarConsulta(std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora){
-	return adicionarConsulta(dia, mes, ano, paciente, hora);
-}
-
-void Psicologo::desmarcarConsulta(std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora){
-	desmarcarConsulta(dia, mes, ano, paciente, hora);
-}
-
-void Psicologo::setCRP(std::string CRP){
-	this->CRP=CRP;
-}
-void Psicologo::setAgenda(Agenda * agenda){
-	this->agenda = agenda;
-}
-
 std::string Psicologo::getCRP(){
-	return this->CRP;
+	return this->_crp;
 }
 
-Agenda* Psicologo::getAgenda(){
-	return this->agenda;
+// OPERACOES AGENDA
+void Psicologo::adicionarConsulta(std::string in_paciente, std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora) {
+	int dia = converterParaInteiro(in_dia);
+	int mes = converterParaInteiro(in_mes);
+	int ano = converterParaInteiro(in_ano);
+	int hora = converterParaInteiro(in_hora);
+	agenda->adicionarConsulta(in_paciente, dia, mes, ano, hora);
 }
-*/
-void Psicologo::imprimirDados() {
-	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " << CRP << "|" << std::endl;
+
+void Psicologo::desmarcarConsulta(std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora) {
+	int dia = converterParaInteiro(in_dia);
+	int mes = converterParaInteiro(in_mes);
+	int ano = converterParaInteiro(in_ano);
+	int hora = converterParaInteiro(in_hora);
+	agenda->desmarcarConsulta(dia, mes, ano, hora);
 }
 
-std::vector<std::string> Psicologo::cadastro = {"CPF: ", "Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: ", "Numero CRP: "};
+std::string Psicologo::getConsulta(std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora) {
+	int dia = converterParaInteiro(in_dia);
+	int mes = converterParaInteiro(in_mes);
+	int ano = converterParaInteiro(in_ano);
+	int hora = converterParaInteiro(in_hora);
+	return agenda->getConsulta(dia, mes, ano, hora);
+}
 
-std::string Psicologo::nomeClasse = "psicologo";
-
-std::string Psicologo::arquivo = "psicologo.txt";
-
-std::vector<std::string> Psicologo::dados = {"Nome", "Endereco", "Telefone", "Data Inicio", "Data Fim", "CRP"};
-
-int Psicologo::quantidade;
+void Psicologo::imprimirConsultas() {
+	agenda->imprimirConsultas();
+}

@@ -1,43 +1,28 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 
-#include <iostream>
-#include <string>
 #include "pessoa.h"
-#include <vector>
 #include <fstream>
 
 class Paciente : public Pessoa{
 private:
-	std::string psicologoResponsavel;
-	std::string queixa; 
-	float mensalidade;
+	std::string _psicologoResponsavel;
+	std::string _queixa; 
 	std::vector<std::string> prontuario;
 public:
 	
-	// CONSTRUTORES E DESTRUTORES
+	// CONSTRUTORES
+	Paciente(std::string cpf, std::string nome, std::string rua, std::string telefone, std::string dataInicio);
 	Paciente(std::vector<std::string> dados);
-	Paciente(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
-	~Paciente();
 
 	// SETTERS (Setar informação dos atributos da classe)
 	void setPsicologoResponsavel(std::string pr);
-	void setInformacao(std::string inf) override;
-	
+	void setQueixa(std::string queixa);	
 	// GETTERS (Retornar informação dos atributos da classe)
-	void getInformacoes();
 	std::string getPsicologoResponsavel();
 	std::string getQueixa();
 
-	void imprimirDados();
-	
-	//Para adicionar informações no prontuário"
-	void addEntrada(std::string CRP, std::string entrada);
-	static int quantidade;
-	static std::vector<std::string> cadastro;
-	static std::string nomeClasse;
-	static std::string arquivo;
-	static std::vector<std::string> dados;
+	void imprimirDados() override;
 };
 
 #endif

@@ -1,41 +1,28 @@
-#pragma once
+#ifndef PSICOLOGO_H
+#define PSICOLOGO_h
 
-#include <string>
-#include <vector>
 #include "pessoa.h"
-#include "funcionario.h"
 #include "agenda.h"
 
 
-class Psicologo : public Pessoa, public Funcionario {
+class Psicologo : public Pessoa {
 	private:
-		std::string CRP;
-		Agenda * agenda;
+		std::string _crp;
+		Agenda *agenda;
 	public:
-		Psicologo(std::string CRP, std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
-		Psicologo(std::vector<std::string> psicologoDados);
-		~Psicologo();
-
-		void imprimirDados();
-		//Consultar os pacientes do dia do psicologo selecionado
-		/*
-		std::string consultarAgendaDia() override;
-		std::string proximaConsulta() override;
-		std::string adicionarConsulta(std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora) override;
-
-		void desmarcarConsulta(std::string dia, std::string mes, std::string ano, std::string paciente, std::string hora) override;
-		*/
-
-		// SETTERS
-		void setCRP(std::string CRP);
-		void setAgenda(Agenda *agenda);
+		// CONSTRUTORES
+		Psicologo(std::vector<std::string> dados); 
+		Psicologo(std::string cpf, std::string nome, std::string endereco, std::string telefone, std::string dataInicio,
+		std::string crp, std::string inicioExpediente, std::string fimExpediente);
 
 		// GETTERS
 		std::string getCRP();
-		Agenda* getAgenda();
-		static int quantidade;
-		static std::vector<std::string> cadastro;
-		static std::string nomeClasse;
-		static std::string arquivo;
-		static std::vector<std::string> dados;
+
+		// OPERACOES AGENDA
+		void desmarcarConsulta(std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora);
+		std::string getConsulta(std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora);
+		void adicionarConsulta(std::string in_paciente, std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora);
+		void imprimirConsultas();
 };
+
+#endif

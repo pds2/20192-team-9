@@ -2,40 +2,32 @@
 #define PESSOA_H
 
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 
 class Pessoa{
 protected:
-	std::string CPF;
-	std::string nome;
-	std::string endereco;
-	std::string telefone;
-	std::string dataInicio;
-	std::string dataFim;
+	std::string _cpf;
+	std::string _nome;
+	std::string _rua;
+	std::string _telefone;
+	std::string _dataInicio;
+	bool isNumero(std::string s); 	// Checa se a string e composta completamente por numeros
+	bool isLetra(std::string s);	// Checa se a string e composta completamente por letras e espacos
+	int converterParaInteiro(std::string &s);
 public:
-	//CONSTRUTORES E DESTRUTORES (Criando e destruindo o objeto)
-	Pessoa();
-	Pessoa(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio);
-	~Pessoa();
-
-	// SETTERS (Setar informação dos atributos da classe)
-	void setCPF(std::string CPF);
-	void setEndereco(std::string endereco);
-	void setNome(std::string nome);
-	void setTelefone(std::string telefone);
-	void setDataInicio(std::string dataInicio);
-	void setDataFim(std::string dataFim);
-	virtual void setInformacao(std::string inf) {}
-	virtual void imprimirDados() = 0;
-
-	// GETTERS (Retornar informação dos atributos da classe)
+	//CONSTRUTORES
+	Pessoa(std::string cpf, std::string nome, std::string rua, std::string telefone, std::string dataInicio);
+	Pessoa(std::vector<std::string> dados);
+	// GETTERS
 	std::string getCPF();
-	std::string getEndereco();
+	std::string getRua();
 	std::string getNome();
 	std::string getTelefone();
 	std::string getDataInicio();
-	std::string getDataFim();
-	
+	virtual void imprimirDados();
+
 };
 
 #endif

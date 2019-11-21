@@ -19,14 +19,13 @@ bool Agenda::isDiaSemana(int dia, int mes, int ano)
 
     return !(k == 0 || k == 1);
 }
-
-bool Agenda::isClinicaAberta(int hora)
-{
-    int inicioExpediente = 7;
-    int fimExpediente = 17;
-
-    return (hora >= inicioExpediente && hora <= fimExpediente);
-}
+/*
+bool Agenda::isNumero(std::string s) {
+	bool isDigit = true;
+	for(std::string::iterator it = s.begin(); it != s.end(); it++) 
+		isDigit = isDigit && std::isdigit(*it);
+	return !s.empty() && isDigit;
+}*/
 
 std::string gerarId(int dia, int mes, int ano)
 {
@@ -44,13 +43,25 @@ std::string gerarId(int dia, int mes, int ano)
 
 
 Agenda::Agenda(int inicio, int fim)
-{
-	if(!isClinicaAberta(inicio) || !isClinicaAberta(fim)) 
+	:
+	aberturaClinica(7),
+	fechamentoClinica(17)
+{		
+	if(inicio < aberturaClinica || inicio > fechamentoClinica || fim < aberturaClinica || fim > fechamentoClinica)
 		throw std::invalid_argument("O horario de funcionamento da clinica e de 7h as 17h");
+
 	for(int i = inicio; i <= fim; i++) {
 		horarios.push_back(i);
 	}
 }
+/*
+int Agenda::converterParaInteiro(std::string s) {
+	int inteiro = 0;
+	std::istringstream stream(s);
+	stream >> inteiro;
+
+	return inteiro;
+}*/
 
 Agenda::Dia::Dia(int dia, int mes, int ano, std::vector<int> horarios) 
 	:
@@ -87,7 +98,7 @@ void Agenda::adicionarConsulta(std::string paciente, int dia, int mes, int ano, 
 	{
 		throw std::invalid_argument("A clinica so funciona de segunda a sexta");
 	}
-	else if(!isClinicaAberta(hora))
+	else if(hora < aberturaClinica || hora > fechamentoClinica)
 	{
 		throw std::invalid_argument("O horario de funcionamento da clinica e de 7h as 17h");
 	}
@@ -103,13 +114,11 @@ void Agenda::adicionarConsulta(std::string paciente, int dia, int mes, int ano, 
 	}
 
 	//Marca a consulta
-	try{
-		if( (*itr).consultas[hora] != "disponivel")
-			throw std::invalid_argument("Horario ocupado");
-		(*itr).consultas[hora] = paciente;
-	} catch (std::out_of_range) {
+	if( (*itr).consultas.count(hora) == 0 )
 		throw std::out_of_range("Horario fora do expediente do psicologo");
-	}
+	if((*itr).consultas[hora] != "disponivel")
+		throw std::invalid_argument("Horario ocupado");
+	(*itr).consultas[hora] = paciente;
 }
 
 void Agenda::imprimirConsultas() {

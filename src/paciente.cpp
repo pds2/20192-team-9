@@ -1,13 +1,12 @@
 #include "paciente.h"
 
-// (PACIENTE) CONSTRUTORES E DESTRUTORES
-Paciente::Paciente(std::string CPF, std::string nome, std::string endereco, std::string telefone, std::string dataInicio)
+// CONSTRUTORES
+Paciente::Paciente(std::string cpf, std::string nome, std::string rua, std::string telefone, std::string dataInicio)
 	:
-	Pessoa(CPF, nome, endereco, telefone, dataInicio),
-	psicologoResponsavel(" - "),
-	queixa(" - ")
+	Pessoa(cpf, nome, rua, telefone, dataInicio),
+	_psicologoResponsavel("-"),
+	_queixa("-")
 {
-	quantidade++;
 }
 
 Paciente::Paciente(std::vector<std::string> dados) 
@@ -16,45 +15,25 @@ Paciente::Paciente(std::vector<std::string> dados)
 {
 }
 
-int Paciente::quantidade = 0;
-
-std::string Paciente::nomeClasse = "paciente";
-
-std::vector<std::string> Paciente::dados = {"Nome", "Endereco", "Telefone", "Data Inicio", "Data Fim", "Psicologo Responsavel", "Queixa", "Mensalidade"};
-
-Paciente::~Paciente(){
-} 
-
-// (PACIENTE) SETTERS (Setar informação dos atributos da classe)
-void Paciente::setPsicologoResponsavel(std::string pr){
-	this->psicologoResponsavel = pr;
+// SETTERS
+void Paciente::setQueixa(std::string queixa){
+	this->_queixa = queixa;
 }
 
-// GETTERS (Retornar informação dos atributos da classe)
+void Paciente::setPsicologoResponsavel(std::string pr){
+	this->_psicologoResponsavel = pr;
+}
+
+// GETTERS
 std::string Paciente::getPsicologoResponsavel(){
-	return this->psicologoResponsavel;
+	return this->_psicologoResponsavel;
 }
 
 std::string Paciente::getQueixa(){
-	return this->queixa;
-}
-
-void Paciente::addEntrada(std::string CRP, std::string entrada){
-	if (CRP==this->psicologoResponsavel){
-		this->prontuario.push_back(entrada);
-	}
-
+	return this->_queixa;
 }
 
 void Paciente::imprimirDados() {
-	std::cout << nome << " | " << endereco << " | " << telefone << " | " << dataInicio << " | " << dataFim << " | " <<
-	psicologoResponsavel << " | " << queixa << " | " << mensalidade << std::endl;
+	std::cout << _nome << " |\t"  << _rua << " |\t"  << _telefone << " |\t"  << _dataInicio << " |\t"  <<
+	_psicologoResponsavel << " |\t"  << _queixa << std::endl;
 }
-
-void Paciente::setInformacao(std::string inf) {
-	this->queixa = inf;
-}
-
-std::string Paciente::arquivo = "paciente.txt";
-
-std::vector<std::string> Paciente::cadastro = {"CPF: ", "Nome: ", "Endereco: ", "Telefone: ", "Data de Inicio: "};
