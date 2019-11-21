@@ -108,26 +108,6 @@ void Sistema::sair()
 	std::cout << "Obrigado por usar nosso programa!" << std::endl;
 }
 
-bool Sistema::isCadastrado(std::string cpf, std::string funcionario) 
-{
-	if(funcionario == "secretaria") {
-		for(std::vector<Pessoa*>::iterator itr = secretarias.begin(); itr != secretarias.end(); itr++) {
-			if((*itr)->getCPF() == cpf) {
-				secretariaUsuario = *itr;
-				return true;
-			}
-		}
-	} else if (funcionario == "psicologo") {
-		for(std::vector<Psicologo*>::iterator itr = psicologos.begin(); itr != psicologos.end(); itr++) {
-			if((*itr)->getCPF() == cpf) {
-				psicologoUsuario = *itr;
-				return true;
-			}
-		}
-	}
-		return false;
-}
-
 void Sistema::paginaInicial() 
 {
 	while (true) {
@@ -155,6 +135,7 @@ void Sistema::cadastrarSecretaria() {
 	bool flag = true;
 	limparTela();
 	while(flag) {
+		
 		try {
 			std::vector<std::string> dados = preencher(cadastro);
 			secretarias.push_back(new Pessoa(dados));
@@ -208,13 +189,29 @@ void Sistema::logar()
 		std::string cpf;
 		std::getline(std::cin, cpf);
 
-		if (isCadastrado(cpf, "secretaria")) {
-			ambienteSecretaria();
-			break;
+		std::string logado;
+		for(std::vector<Pessoa*>::iterator itr = secretarias.begin(); itr != secretarias.end(); itr++) {
+			if((*itr)->getCPF() == cpf) {
+				secretariaUsuario = *itr;
+				logado = "secretaria";
+				break;
+			}
 		}
-		else if (isCadastrado(cpf, "psicologo")) {
+		for(std::vector<Psicologo*>::iterator itr = psicologos.begin(); itr != psicologos.end(); itr++) {
+			if((*itr)->getCPF() == cpf) {
+				psicologoUsuario = *itr;
+				logado = "psicologo";
+				break;
+			}
+		}
+
+		if (logado == "secretaria") {
+			ambienteSecretaria();
+			flag = false;
+		}
+		else if (logado == "psicologo") {
 			ambientePsicologo();
-			break;
+			flag = false;
 		}
 		else {
 			limparTela();
@@ -231,6 +228,7 @@ void Sistema::ambienteSecretaria()
 {
 	while(true) {
 		limparTela();
+		std::cout << "Logado:\t" << secretariaUsuario->getNome() << "\t" << "Secretaria" << std::endl;
 		int e = mostrarOpcoes({"Visualizar Pacientes","Marcar Consulta","Cadastrar Pacientes", "Voltar para Pagina Inicial"});
 		if (e == 1) {
 			imprimirPaciente("paciente.txt");
@@ -247,6 +245,7 @@ void Sistema::ambientePsicologo()
 {
 	while(true) {
 		limparTela();
+		std::cout << "Logado:\t" << psicologoUsuario->getNome() << "\t" << "Psicologo" << std::endl;
 		int e = mostrarOpcoes({"Consultar Agenda","Escrever Prontuario", "Consultar Prontuario","Voltar para Pagina Inicial"});
 		if (e == 1) {
 			consultarAgenda();

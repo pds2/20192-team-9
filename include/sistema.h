@@ -18,28 +18,35 @@ class Sistema {
     std::vector<Pessoa*> secretarias;
     std::vector<Psicologo*> psicologos;
 public:
+    // CONSTRUTORES
     Sistema();
-    // Facilitadores
-    void limparTela();
+
+    // FACILITADORES
     int mostrarOpcoes(std::vector<std::string> opcoes);
     std::vector<std::vector<std::string>> lerArquivo(std::string arquivo);
     std::vector<std::string> preencher(std::vector<std::string> campos);
+    void limparTela();
+
+    // OUTRAS OPERACOES
     void salvar(std::vector<std::string> dados, std::string arquivo);
     void sair();
-    bool isCadastrado(std::string cpf, std::string funcionario);
-    int converterParaInteiro(std::string &s);
-    // Operacoes no sistema
+
+    // OUTRAS PAGINAS
     void paginaInicial();
     void logar();
+    void consultarAgenda();
+    void escreverProntuario();
+
+    // AMBIENTES
     void ambienteSecretaria();
     void ambientePsicologo();
-    void escreverProntuario();
-    void consultarAgenda();
 
+    // IMPRIMIR
     void imprimirPaciente(const char* arquivo);
     void imprimirPsicologo(const char* arquivo);
     void imprimirSecretaria(const char* arquivo);
 
+    // CADASTRAR
     void cadastrarPaciente();
     void cadastrarPsicologo();
     void cadastrarSecretaria();
