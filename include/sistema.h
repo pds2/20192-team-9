@@ -26,6 +26,7 @@ public:
     std::vector<std::vector<std::string>> lerArquivo(std::string arquivo);
     std::vector<std::string> preencher(std::vector<std::string> campos);
     void limparTela();
+    bool validar_CPF(std::string cpf);
 
     // OUTRAS OPERACOES
     void salvar(std::vector<std::string> dados, std::string arquivo);
