@@ -19,13 +19,6 @@ bool Agenda::isDiaSemana(int dia, int mes, int ano)
 
     return !(k == 0 || k == 1);
 }
-/*
-bool Agenda::isNumero(std::string s) {
-	bool isDigit = true;
-	for(std::string::iterator it = s.begin(); it != s.end(); it++) 
-		isDigit = isDigit && std::isdigit(*it);
-	return !s.empty() && isDigit;
-}*/
 
 std::string gerarId(int dia, int mes, int ano)
 {
@@ -54,14 +47,6 @@ Agenda::Agenda(int inicio, int fim)
 		horarios.push_back(i);
 	}
 }
-/*
-int Agenda::converterParaInteiro(std::string s) {
-	int inteiro = 0;
-	std::istringstream stream(s);
-	stream >> inteiro;
-
-	return inteiro;
-}*/
 
 Agenda::Dia::Dia(int dia, int mes, int ano, std::vector<int> horarios) 
 	:

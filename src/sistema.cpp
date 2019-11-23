@@ -108,16 +108,6 @@ std::vector<std::string> Sistema::preencher(std::vector<std::string> campos)
 		std::string entrada;
 		std::cout << (*itr) << ":\t";
 		getline(std::cin, entrada);
-		/*
-		if(*itr== "CPF"){
-			bool flag =validar_CPF(entrada);
-			while(!flag){
-				limparTela();
-				std::cout<<"CPF invalido, por favor digite novamente: ";
-				getline(std::cin, entrada);
-				flag =validar_CPF(entrada);
-			}
-		}*/
 		dados.push_back(entrada);
 	}
 	return dados;
@@ -130,42 +120,37 @@ void Sistema::sair()
 
 bool Sistema::validar_CPF(std::string cpf){
 	int cpfFinal[11];
-	if(cpf.length()!=11){
+	if(cpf.length() != 11)
 		return false;
-	}else{
-		for(unsigned int i=0; i<cpf.length();i++){
-			int number=(int)cpf[i]-'0';
-			
-			if(number<0||number>9){
+	else {
+		for(unsigned int i=0; i<cpf.length();i++) {
+			int number = (int)cpf[i]-'0';
+			if(number < 0 || number>9)
 				return false;
-			}else{
+			else
 				cpfFinal[i]=number;
-			}
 		}
 		int dezena, unidade;
-		int soma1 = (cpfFinal[0]*2+cpfFinal[1]*3+cpfFinal[2]*4+cpfFinal[3]*5+cpfFinal[4]*6+cpfFinal[5]*7+cpfFinal[6]*8+cpfFinal[7]*9+cpfFinal[8]*10);
-    	int resto1 = soma1%11;
-    	if (resto1==0 || resto1==1){
-       		unidade=0;
-    	}else {
-            unidade = 11-resto1;
-        }
-        int soma2 = (unidade*2+cpfFinal[0]*3+cpfFinal[1]*4+cpfFinal[2]*5+cpfFinal[3]*6+cpfFinal[4]*7+cpfFinal[5]*8+cpfFinal[6]*9+cpfFinal[7]*10+cpfFinal[8]*11);
-    	int resto2 = soma2%11;
-     	if (resto2==0 || resto2==1){
-       		dezena=0;
-    	}else {
-        	dezena = 11-resto2;
-        }
-        if(cpfFinal[9]!=dezena||cpfFinal[10]!=unidade){
-        	return false;
-        }else{
-        	return true;
-        }
+		int soma1 = (cpfFinal[0]*10+cpfFinal[1]*9+cpfFinal[2]*8+cpfFinal[3]*7+cpfFinal[4]*6+cpfFinal[5]*5+cpfFinal[6]*4+cpfFinal[7]*3+cpfFinal[8]*2);
+		int resto1 = soma1%11;
+		if (resto1==0 || resto1==1)
+			dezena = 0;
+		else
+			dezena = 11-resto1;
+		int soma2 = (dezena*2+cpfFinal[0]*11+cpfFinal[1]*10+cpfFinal[2]*9+cpfFinal[3]*8+cpfFinal[4]*7+cpfFinal[5]*6+cpfFinal[6]*5+cpfFinal[7]*4+cpfFinal[8]*3);
+		int resto2 = soma2%11;
+		if (resto2 == 0 || resto2 == 1)
+			unidade = 0;
+		else 
+			unidade = 11-resto2;
+		if(cpfFinal[9]!=dezena||cpfFinal[10]!=unidade)
+			return false;
+		else
+			return true;
 	}
 }
 
-void Sistema::logar(std::string cpf) 
+void Sistema::logar(std::string cpf)  
 {
 	std::vector<Psicologo*>::const_iterator psicologo = encontrar(psicologos,cpf);
 	std::vector<Pessoa*>::const_iterator secretaria = encontrar(secretarias,cpf);
