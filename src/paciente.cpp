@@ -34,6 +34,6 @@ std::string Paciente::getQueixa(){
 }
 
 void Paciente::imprimirDados() {
-	std::cout << _nome << " |\t"  << _rua << " |\t"  << _telefone << " |\t"  << _dataInicio << " |\t"  <<
-	_psicologoResponsavel << " |\t"  << _queixa << std::endl;
+	std::cout << "Nome:" <<_nome << "\tEndereco:"  << _rua << " \tTelefone:"  << _telefone << "\tData de Inicio:"  
+	<< _dataInicio << "\tPsicologo Responsavel:" << _psicologoResponsavel << std::endl << "Queixa:" << _queixa << std::endl;
 }

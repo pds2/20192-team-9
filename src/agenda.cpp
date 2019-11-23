@@ -123,12 +123,16 @@ void Agenda::adicionarConsulta(std::string paciente, int dia, int mes, int ano, 
 
 void Agenda::imprimirConsultas() {
 	std::cout << "\t" << "Consultas" << std::endl;
-	for(std::list<Dia>::iterator itr = dias.begin(); itr != dias.end(); itr++) {
-		std::cout << "Dia: "<< (*itr).dia << " Mes: "<< (*itr).mes << " Ano: "<< (*itr).ano << std::endl;
-		for(std::map<int, std::string>::iterator it = (*itr).consultas.begin(); it != (*itr).consultas.end(); it++) {
-			std::cout << it->first << ":00\t" << it->second << std::endl;
+	if(dias.size() == 0)
+		std::cout << "Nenhum Consulta Cadastrada" << std::endl;
+	else {
+		for(std::list<Dia>::iterator itr = dias.begin(); itr != dias.end(); itr++) {
+			std::cout << "Dia: "<< (*itr).dia << " Mes: "<< (*itr).mes << " Ano: "<< (*itr).ano << std::endl;
+			for(std::map<int, std::string>::iterator it = (*itr).consultas.begin(); it != (*itr).consultas.end(); it++) {
+				std::cout << it->first << ":00\t" << it->second << std::endl;
+			}
+		std::cout << std::endl;
 		}
-	std::cout << std::endl;
 	}
 }
 

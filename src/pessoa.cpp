@@ -68,7 +68,7 @@ std::string Pessoa::getDataInicio(){
 }
 
 void Pessoa::imprimirDados() {
-    std::cout << _nome << " |\t" << _rua << " |\t" << _telefone << " |\t" << _dataInicio << " |\t" << std::endl;
+    std::cout << "Nome:" <<_nome << " \tEndereco:" << _rua << " \tTelefone:" << _telefone << " \tData de Inicio:" << _dataInicio << std::endl;
 }
 
 int Pessoa::converterParaInteiro(std::string &s) {

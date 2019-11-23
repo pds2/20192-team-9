@@ -8,7 +8,6 @@ TEST_CASE("01 - Testando Construtor, setters e getters") {
     CHECK_NOTHROW(new Paciente(dados)); // Passando vetor para construtor
 
     Paciente p("10486571670", "Vitor Damasceno Santos", "Manoel Gomes", "31985468745", "15102010");
-    p.imprimirDados();
     p.setPsicologoResponsavel("Pedro");
     p.setQueixa("Sentindo muita ansiedade");
     CHECK(p.getPsicologoResponsavel() == "Pedro");
