@@ -127,7 +127,7 @@ void Sistema::sair()
 
 bool Sistema::validar_CPF(std::string cpf){
 	int cpfFinal[11];
-	if(cpf.length() != 11)
+	if(cpf.size() != 11)
 		return false;
 	else {
 		for(unsigned int i=0; i<cpf.length();i++) {
@@ -137,6 +137,16 @@ bool Sistema::validar_CPF(std::string cpf){
 			else
 				cpfFinal[i]=number;
 		}
+
+
+		do
+		{
+			getline(std::cin, cpf);
+			if(cpf.size() != 11)
+				return false;
+		} while (cpf.size() != 11);
+		
+
 		int dezena, unidade;
 		int soma1 = (cpfFinal[0]*10+cpfFinal[1]*9+cpfFinal[2]*8+cpfFinal[3]*7+cpfFinal[4]*6+cpfFinal[5]*5+cpfFinal[6]*4+cpfFinal[7]*3+cpfFinal[8]*2);
 		int resto1 = soma1%11;
@@ -150,6 +160,7 @@ bool Sistema::validar_CPF(std::string cpf){
 			unidade = 0;
 		else 
 			unidade = 11-resto2;
+
 		if(cpfFinal[9]!=dezena||cpfFinal[10]!=unidade)
 			return false;
 		else
@@ -206,7 +217,7 @@ void Sistema::paginaInicial()
 			do {
 				limparTela();
 				std::cout << opcao << std::endl;
-				std::vector<std::string> dados = preencher({"CPF", "Nome", "Rua", "Telefone", "Data de Inicio"});
+				std::vector<std::string> dados = preencher({"CPF (somente numeros)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)"});
 				try {
 					cadastrar(new Pessoa(dados), dados);
 					std::cout << "Secretaria Cadastrada!" << std::endl;
@@ -222,7 +233,7 @@ void Sistema::paginaInicial()
 			do {
 				limparTela();
 				std::cout << opcao << std::endl;
-				std::vector<std::string> dados = preencher({"CPF", "Nome", "Rua", "Telefone", "Data de Inicio", "CRP" , "Inicio Expediente", "Fim Expediente"});
+				std::vector<std::string> dados = preencher({"CPF (somente numeros)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)", "CRP" , "\n============================\nHorario de funcionamento de 7 as 16.\nInicio Expediente (hh)", "Fim Expediente (hh)"});
 				try {
 					cadastrar(new Psicologo(dados), dados);
 					std::cout << "Psicologo Cadastrado!" << std::endl;
@@ -271,6 +282,7 @@ void Sistema::ambienteSecretaria()
 				if(opcao == "Limpar Tudo")
 					deletar(pacientes);
 			} while(opcao != "Voltar");
+<<<<<<< HEAD
 		} if(opcao == "Visualizar Agenda") {
 			try{
 				imprimirAgenda();
@@ -279,6 +291,26 @@ void Sistema::ambienteSecretaria()
 			}
 			std::cin.get();
 		} if(opcao == "Marcar Consulta") {
+=======
+		} 
+		
+		
+	
+		if (opcao == "Visualizar Agenda") {
+			do {
+				limparTela();
+				usuarioPsicologo->imprimirConsultas();
+				opcao = mostrarOpcoes({"Voltar"});
+			} while (opcao != "Voltar");
+
+
+		} 
+		
+		
+		
+		
+		if(opcao == "Marcar Consulta") {
+>>>>>>> 267f5d04b51b536c9ae7c0de737820b42fe52ad7
 			do {
 				limparTela();
 				std::cout << opcao << std::endl;
@@ -297,7 +329,7 @@ void Sistema::ambienteSecretaria()
 			do {
 				limparTela();
 				std::cout << opcao << std::endl;
-				std::vector<std::string> dados = preencher({"CPF", "Nome", "Rua", "Telefone", "Data de Inicio"});
+				std::vector<std::string> dados = preencher({"CPF (somente números)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)"});
 				try {
 					cadastrar(new Paciente(dados), dados);
 					std::cout << "Paciente Cadastrado!" << std::endl;
