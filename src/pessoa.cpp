@@ -12,10 +12,10 @@ Pessoa::Pessoa(std::string cpf, std::string nome, std::string rua, std::string t
 		throw std::invalid_argument("Nome Invalido! Digite apenas letras e espacos");
 	this->_nome = nome;
 
-	if(!isLetra(rua))
+/*	if(!isLetra(rua))
 		throw std::invalid_argument("Rua Invalida! Digite apenas letras e espacos");
 	this->_rua = rua;
-
+*/
 	if(!isNumero(telefone))
 		throw std::invalid_argument("Telefone Invalido! Digite apenas numeros");
 	this->_telefone = telefone;
@@ -68,7 +68,7 @@ std::string Pessoa::getDataInicio(){
 }
 
 void Pessoa::imprimirDados() {
-    std::cout << "Nome:" <<_nome << " \tEndereco:" << _rua << " \tTelefone:" << _telefone << " \tData de Inicio:" << _dataInicio << std::endl;
+    std::cout << "Nome:" <<_nome << "\t CPF:"<< _cpf <<" \tEndereco:" << _rua << " \tTelefone:" << _telefone << " \tData de Inicio:" << _dataInicio << std::endl;
 }
 
 int Pessoa::converterParaInteiro(std::string &s) {
