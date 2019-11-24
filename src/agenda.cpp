@@ -109,7 +109,7 @@ void Agenda::adicionarConsulta(std::string paciente, int dia, int mes, int ano, 
 void Agenda::imprimirConsultas() {
 	std::cout << "\t" << "Consultas" << std::endl;
 	if(dias.size() == 0)
-		std::cout << "Nenhum Consulta Cadastrada" << std::endl;
+		throw std::invalid_argument("Nenhum Consulta Cadastrada!");
 	else {
 		for(std::list<Dia>::iterator itr = dias.begin(); itr != dias.end(); itr++) {
 			std::cout << "Dia: "<< (*itr).dia << " Mes: "<< (*itr).mes << " Ano: "<< (*itr).ano << std::endl;

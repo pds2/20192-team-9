@@ -66,5 +66,10 @@ public:
     void adicionar(Psicologo* psicologo);
     void adicionar(Paciente* paciente);
 
-    void marcarConsulta(std::vector<std::string> dados);
+    void cadastrar(Paciente *paciente, std::vector<std::string>& dados);
+    void cadastrar(Pessoa *secretaria, std::vector<std::string>& dados);
+    void cadastrar(Psicologo *psicologo, std::vector<std::string>& dados);
+
+    void marcarConsulta(std::vector<std::string>& dados);
+    void imprimirAgenda();
 };

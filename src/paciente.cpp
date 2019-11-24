@@ -20,6 +20,10 @@ void Paciente::setQueixa(std::string queixa){
 	this->_queixa = queixa;
 }
 
+void Paciente::addQueixa(std::string queixa) {
+	this->_queixa += queixa;
+}
+
 void Paciente::setPsicologoResponsavel(std::string pr){
 	this->_psicologoResponsavel = pr;
 }

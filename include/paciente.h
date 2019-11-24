@@ -18,6 +18,7 @@ public:
 	// SETTERS (Setar informação dos atributos da classe)
 	void setPsicologoResponsavel(std::string pr);
 	void setQueixa(std::string queixa);	
+	void addQueixa(std::string queixa);
 	// GETTERS (Retornar informação dos atributos da classe)
 	std::string getPsicologoResponsavel();
 	std::string getQueixa();

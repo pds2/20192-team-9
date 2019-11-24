@@ -15,6 +15,7 @@ protected:
 	std::string _dataInicio;
 	bool isNumero(std::string s); 	// Checa se a string e composta completamente por numeros
 	bool isLetra(std::string s);	// Checa se a string e composta completamente por letras e espacos
+	bool isCpfValido(std::string cpf);
 	int converterParaInteiro(std::string &s);
 public:
 	//CONSTRUTORES
@@ -27,6 +28,7 @@ public:
 	std::string getTelefone();
 	std::string getDataInicio();
 	virtual void imprimirDados();
+
 
 };
 

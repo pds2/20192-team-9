@@ -15,6 +15,8 @@ Psicologo::Psicologo(std::string cpf, std::string nome, std::string endereco, st
 	std::istringstream fimstream(fimExpediente);
 	iniciostream >> inicio;
 	fimstream >> fim;
+	if(inicio > fim)
+		throw std::invalid_argument("Hora Invalida! Inicio maior que o fim");
 
 	agenda = new Agenda(inicio, fim);
 }
