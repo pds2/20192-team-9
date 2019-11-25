@@ -9,13 +9,13 @@ Sistema::Sistema()
 	std::vector<std::vector<std::string>>::iterator itr;
 	try {
 		for(itr = pacientesData.begin(); itr != pacientesData.end(); itr++) {
-			adicionar(new Paciente(*itr));
+			pacientes.push_back(new Paciente(*itr));
 		}
 		for(itr = secretariasData.begin(); itr != secretariasData.end(); itr++) {
-			adicionar(new Pessoa(*itr));
+			secretarias.push_back(new Pessoa(*itr));
 		}
 		for(itr = psicologosData.begin(); itr != psicologosData.end(); itr++) {
-			adicionar(new Psicologo(*itr));
+			psicologos.push_back(new Psicologo(*itr));
 		}
 	}catch(std::invalid_argument &e) {
 		throw std::invalid_argument("Arquivos txt defeituosos, por favor delete-os");
@@ -23,8 +23,14 @@ Sistema::Sistema()
 
 }
 
-std::vector<Psicologo*> Sistema::getPsicologos() {
+std::vector<Psicologo*>& Sistema::getPsicologos() {
 	return this->psicologos;
+}
+std::vector<Pessoa*>& Sistema::getSecretarias() {
+	return this->secretarias;
+}
+std::vector<Paciente*>& Sistema::getPacientes() {
+	return this->pacientes;
 }
 
 std::vector<std::vector<std::string>> Sistema::lerArquivo(std::string arquivo) 
@@ -87,17 +93,6 @@ std::string Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
 	return opcoes[e-1];
 }
 
-void Sistema::salvar(std::vector<std::string> dados, std::string arquivo) 
-{
-	std::ofstream pessoa;
-	pessoa.open(arquivo, std::ios::app);
-	for(std::vector<int>::size_type i = 0; i != dados.size(); i++) {
-		pessoa << dados[i] << ",";
-	}
-	pessoa << std::endl;
-	pessoa.close();
-}
-
 void Sistema::limparTela() 
 {
 	#ifdef WINDOWS
@@ -120,79 +115,21 @@ std::vector<std::string> Sistema::preencher(std::vector<std::string> campos)
 	return dados;
 }
 
-void Sistema::sair() 
-{
-	
-}
-
-bool Sistema::validar_CPF(std::string cpf){
-	int cpfFinal[11];
-	if(cpf.size() != 11)
-		return false;
-	else {
-		for(unsigned int i=0; i<cpf.length();i++) {
-			int number = (int)cpf[i]-'0';
-			if(number < 0 || number>9)
-				return false;
-			else
-				cpfFinal[i]=number;
-		}
-
-
-		do
-		{
-			getline(std::cin, cpf);
-			if(cpf.size() != 11)
-				return false;
-		} while (cpf.size() != 11);
-		
-
-		int dezena, unidade;
-		int soma1 = (cpfFinal[0]*10+cpfFinal[1]*9+cpfFinal[2]*8+cpfFinal[3]*7+cpfFinal[4]*6+cpfFinal[5]*5+cpfFinal[6]*4+cpfFinal[7]*3+cpfFinal[8]*2);
-		int resto1 = soma1%11;
-		if (resto1==0 || resto1==1)
-			dezena = 0;
-		else
-			dezena = 11-resto1;
-		int soma2 = (dezena*2+cpfFinal[0]*11+cpfFinal[1]*10+cpfFinal[2]*9+cpfFinal[3]*8+cpfFinal[4]*7+cpfFinal[5]*6+cpfFinal[6]*5+cpfFinal[7]*4+cpfFinal[8]*3);
-		int resto2 = soma2%11;
-		if (resto2 == 0 || resto2 == 1)
-			unidade = 0;
-		else 
-			unidade = 11-resto2;
-
-		if(cpfFinal[9]!=dezena||cpfFinal[10]!=unidade)
-			return false;
-		else
-			return true;
-	}
-}
-
 void Sistema::logar(std::string cpf)  
 {
-	std::vector<Psicologo*>::const_iterator psicologo = encontrar(psicologos,cpf);
-	std::vector<Pessoa*>::const_iterator secretaria = encontrar(secretarias,cpf);
-	if(psicologo != psicologos.end()) {
-		usuarioPsicologo = *psicologo;
+	try{
+		Psicologo* psicologo = encontrar(psicologos,cpf);
+		usuarioPsicologo = psicologo;
 		ambientePsicologo();
-	} else if(secretaria != secretarias.end()) {
-		usuarioSecretaria = *secretaria;
-		ambienteSecretaria();
-	} else
-		throw std::invalid_argument("CPF nao cadastrado!");
-}
-
-void Sistema::adicionar(Pessoa* secretaria) {
-	secretarias.push_back(secretaria);
-
-}
-
-void Sistema::adicionar(Psicologo* psicologo) {
-	psicologos.push_back(psicologo);
-}
-
-void Sistema::adicionar(Paciente* paciente) {
-	pacientes.push_back(paciente);
+	} catch (std::invalid_argument &e){
+		try{
+			Pessoa* secretaria = encontrar(secretarias,cpf);
+			usuarioSecretaria = secretaria;
+			ambienteSecretaria();
+		} catch (std::invalid_argument &e){
+			throw std::invalid_argument("CPF nao cadastrado!");
+		}
+	}
 }
 
 void Sistema::paginaInicial() 
@@ -219,7 +156,7 @@ void Sistema::paginaInicial()
 				std::cout << opcao << std::endl;
 				std::vector<std::string> dados = preencher({"CPF (somente numeros)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)"});
 				try {
-					cadastrar(new Pessoa(dados), dados);
+					cadastrar(new Pessoa(dados));
 					std::cout << "Secretaria Cadastrada!" << std::endl;
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
@@ -235,7 +172,7 @@ void Sistema::paginaInicial()
 				std::cout << opcao << std::endl;
 				std::vector<std::string> dados = preencher({"CPF (somente numeros)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)", "CRP" , "\n============================\nHorario de funcionamento de 7 as 16.\nInicio Expediente (hh)", "Fim Expediente (hh)"});
 				try {
-					cadastrar(new Psicologo(dados), dados);
+					cadastrar(new Psicologo(dados));
 					std::cout << "Psicologo Cadastrado!" << std::endl;
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
@@ -310,7 +247,7 @@ void Sistema::ambienteSecretaria()
 				std::cout << opcao << std::endl;
 				std::vector<std::string> dados = preencher({"CPF (somente números)", "Nome", "Rua", "Telefone", "Data de Inicio (ddmmaa)"});
 				try {
-					cadastrar(new Paciente(dados), dados);
+					cadastrar(new Paciente(dados));
 					std::cout << "Paciente Cadastrado!" << std::endl;
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
@@ -324,14 +261,10 @@ void Sistema::ambienteSecretaria()
 	}
 }
 void Sistema::marcarConsulta(std::vector<std::string>& dados) {
-	std::vector<Psicologo*>::iterator psicologo = encontrar(psicologos, dados[0]); // Temp
-	if(psicologo == psicologos.end())
-		throw std::invalid_argument("Psicologo nao existe!");
-	std::vector<Paciente*>::iterator paciente = encontrar(pacientes, dados[1]);
-	if(paciente == pacientes.end())
-		throw std::invalid_argument("Paciente nao existe!");
-	(*paciente)->setPsicologoResponsavel((*psicologo)->getNome());
-	(*psicologo)->adicionarConsulta((*paciente)->getNome(), dados[2], dados[3], dados[4], dados[5]);
+	Psicologo* psicologo = encontrar(psicologos, dados[0]); // Temp
+	Paciente* paciente = encontrar(pacientes, dados[1]);
+	paciente->setPsicologoResponsavel(psicologo->getNome());
+	psicologo->adicionarConsulta(paciente->getNome(), dados[2], dados[3], dados[4], dados[5]);
 }
 
 void Sistema::imprimirAgenda(){
@@ -345,19 +278,35 @@ void Sistema::imprimirAgenda(){
 	std::cin.get();
 }
 
-void Sistema::cadastrar(Paciente *paciente, std::vector<std::string>& dados) {
-	adicionar(paciente);
-	salvar(dados, "paciente.txt");
+void Sistema::cadastrar(Paciente *paciente) {
+	pacientes.push_back(paciente);
+
+	std::ofstream pessoa;
+	pessoa.open("paciente.txt", std::ios::app);
+	pessoa << paciente->getCPF() << "," << paciente->getNome() << "," << paciente->getRua() << "," << paciente->getTelefone() << "," 
+	<< paciente->getDataInicio() << "," << std::endl;
+	pessoa.close();
 }
 
-void Sistema::cadastrar(Psicologo *psicologo, std::vector<std::string>& dados) {
-	adicionar(psicologo);
-	salvar(dados, "psicologo.txt");
+void Sistema::cadastrar(Psicologo *psicologo) {
+	psicologos.push_back(psicologo);
+
+	std::ofstream pessoa;
+	pessoa.open("psicologo.txt", std::ios::app);
+	pessoa << psicologo->getCPF() << "," << psicologo->getNome() << "," << psicologo->getRua() << "," << psicologo->getTelefone() << "," 
+	<< psicologo->getDataInicio() << ","  << psicologo->getCRP() << "," << psicologo->getInicioExpediente() << "," 
+	<< psicologo->getFimExpediente() << "," << std::endl;
+	pessoa.close();
 }
 
-void Sistema::cadastrar(Pessoa *secretaria, std::vector<std::string>& dados) {
-	adicionar(secretaria);
-	salvar(dados, "secretaria.txt");
+void Sistema::cadastrar(Pessoa *secretaria) {
+	secretarias.push_back(secretaria);
+
+	std::ofstream pessoa;
+	pessoa.open("secretaria.txt", std::ios::app);
+	pessoa << secretaria->getCPF() << "," << secretaria->getNome() << "," << secretaria->getRua() << "," << secretaria->getTelefone() << "," 
+	<< secretaria->getDataInicio() << "," << std::endl;
+	pessoa.close();
 }
 
 void Sistema::deletar(std::vector<Pessoa*>& secretarias) {
@@ -400,31 +349,31 @@ void Sistema::imprimir(const std::vector<Psicologo*>& psicologos)
 	std::cout << "=============================================================================================" << std::endl;
 }
 
-std::vector<Psicologo*>::iterator Sistema::encontrar(std::vector<Psicologo*>& psicologos, std::string cpf) {
+Psicologo* Sistema::encontrar(std::vector<Psicologo*>& psicologos, std::string cpf) {
 	std::vector<Psicologo*>::iterator itr;
 	for(itr = psicologos.begin(); itr != psicologos.end(); itr++) {
 		if( (*itr)->getCPF() == cpf )
-			return itr;
+			return *itr;
 	}
-	return itr;
+	throw std::invalid_argument("Nao ha nenhum psicologo com esse CPF");
 }
 
-std::vector<Pessoa*>::iterator Sistema::encontrar(std::vector<Pessoa*>& secretarias, std::string cpf) {
+Pessoa* Sistema::encontrar(std::vector<Pessoa*>& secretarias, std::string cpf) {
 	std::vector<Pessoa*>::iterator itr;
 	for(itr = secretarias.begin(); itr != secretarias.end(); itr++) {
 		if( (*itr)->getCPF() == cpf )
-			return itr;
+			return *itr;
 	}
-	return itr;
+	throw std::invalid_argument("Nao ha nenhuma secretaria com esse CPF");
 }
 
-std::vector<Paciente*>::iterator Sistema::encontrar(std::vector<Paciente*>& pacientes, std::string cpf) {
+Paciente* Sistema::encontrar(std::vector<Paciente*>& pacientes, std::string cpf) {
 	std::vector<Paciente*>::iterator itr;
 	for(itr = pacientes.begin(); itr != pacientes.end(); itr++) {
 		if( (*itr)->getCPF() == cpf )
-			return itr;
+			return *itr;
 	}
-	return itr;
+	throw std::invalid_argument("Nao ha nenhum paciente com esse CPF");
 }
 
 
@@ -457,20 +406,20 @@ void Sistema::ambientePsicologo()
 			do {
 				limparTela();
 				std::string cpf = preencher("CPF");
-				std::vector<Paciente*>::iterator paciente = encontrar(pacientes, cpf);
-				if(paciente != pacientes.end()) {
-					std::cout << "Digite o prontuario abaixo" << std::endl;
-					std::cout << (*paciente)->getQueixa();
+				std::cout << "Digite o prontuario abaixo" << std::endl;
+				try{
+					Paciente* paciente = encontrar(pacientes, cpf);
+					std::cout << getQueixa(paciente);
 					std::string queixa;
 					getline(std::cin, queixa);
-					(*paciente)->addQueixa(queixa);
+					addQueixa(paciente, queixa);
 					std::cout << "Queixa cadastrada!" << std::endl;
-					std::cin.get();
 					opcao = "Voltar";
-				} else {
-					std::cout << "Nenhum paciente encontrado!" << std::endl;
+				}catch(std::invalid_argument &e) {
+					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
+				std::cin.get();
 			} while(opcao != "Voltar");
 		} if (opcao == "Visualizar Pacientes") {
 			do {
@@ -483,4 +432,12 @@ void Sistema::ambientePsicologo()
 		} if (opcao == "Voltar para Pagina Inicial") 
 			break;
 	}
+}
+
+std::string Sistema::getQueixa(Paciente* paciente) {
+	return paciente->getQueixa();
+}
+
+void Sistema::addQueixa(Paciente* paciente, std::string queixa) {
+	paciente->addQueixa(queixa);
 }

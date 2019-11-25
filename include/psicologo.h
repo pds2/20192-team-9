@@ -9,6 +9,8 @@ class Psicologo : public Pessoa {
 	private:
 		std::string _crp;
 		Agenda *agenda;
+		int _inicioExpediente;
+		int _fimExpediente;
 	public:
 		// CONSTRUTORES
 		Psicologo(std::vector<std::string> dados); 
@@ -17,6 +19,8 @@ class Psicologo : public Pessoa {
 
 		// GETTERS
 		std::string getCRP();
+		int getInicioExpediente();
+		int getFimExpediente();
 
 		// OPERACOES AGENDA
 		void desmarcarConsulta(std::string in_dia, std::string in_mes, std::string in_ano, std::string in_hora);

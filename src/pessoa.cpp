@@ -14,10 +14,10 @@ Pessoa::Pessoa(std::string cpf, std::string nome, std::string rua, std::string t
 		throw std::invalid_argument("Nome Invalido! Digite apenas letras e espacos");
 	this->_nome = nome;
 
-/*	if(!isLetra(rua))
+	if(!isLetra(rua))
 		throw std::invalid_argument("Rua Invalida! Digite apenas letras e espacos");
 	this->_rua = rua;
-*/
+
 	if(!isNumero(telefone))
 		throw std::invalid_argument("Telefone Invalido! Digite apenas numeros");
 	this->_telefone = telefone;

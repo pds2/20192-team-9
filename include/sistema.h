@@ -22,12 +22,13 @@ public:
     Sistema();
 
     // GETTERS
-    //std::vector<Paciente*> getPacientes();
-    std::vector<Psicologo*> getPsicologos();
-    //std::vector<Pessoa*> getSecretarias();
-    std::vector<Psicologo*>::iterator encontrar(std::vector<Psicologo*>& psicologos, std::string cpf);
-    std::vector<Paciente*>::iterator encontrar(std::vector<Paciente*>& pacientes, std::string cpf);
-    std::vector<Pessoa*>::iterator encontrar(std::vector<Pessoa*>& secretarias, std::string cpf);
+    std::vector<Paciente*>& getPacientes();
+    std::vector<Psicologo*>& getPsicologos();
+    std::vector<Pessoa*>& getSecretarias();
+    
+    Psicologo* encontrar(std::vector<Psicologo*>& psicologos, std::string cpf);
+    Paciente* encontrar(std::vector<Paciente*>& pacientes, std::string cpf);
+    Pessoa* encontrar(std::vector<Pessoa*>& secretarias, std::string cpf);
 
     // FACILITADORES
     std::string mostrarOpcoes(std::vector<std::string> opcoes);
@@ -35,14 +36,6 @@ public:
     std::vector<std::string> preencher(std::vector<std::string> campos);
     std::string preencher(std::string campo);
     void limparTela();
-    bool validar_CPF(std::string cpf);
-
-    //Pessoa encontrarPessoa(Pessoa* p);
-    //Paciente encontrarPessoa(Paciente *p);
-
-    // OUTRAS OPERACOES
-    void salvar(std::vector<std::string> dados, std::string arquivo);
-    void sair();
 
     // OUTRAS PAGINAS
     void paginaInicial();
@@ -62,14 +55,12 @@ public:
     void deletar(std::vector<Paciente*>& pacientes);
 
     // CADASTRAR
-    void adicionar(Pessoa* secretaria);
-    void adicionar(Psicologo* psicologo);
-    void adicionar(Paciente* paciente);
-
-    void cadastrar(Paciente *paciente, std::vector<std::string>& dados);
-    void cadastrar(Pessoa *secretaria, std::vector<std::string>& dados);
-    void cadastrar(Psicologo *psicologo, std::vector<std::string>& dados);
+    void cadastrar(Paciente *paciente);
+    void cadastrar(Pessoa *secretaria);
+    void cadastrar(Psicologo *psicologo);
 
     void marcarConsulta(std::vector<std::string>& dados);
     void imprimirAgenda();
+    void addQueixa(Paciente* paciente, std::string queixa);
+    std::string getQueixa(Paciente* paciente);
 };

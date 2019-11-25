@@ -19,6 +19,8 @@ Psicologo::Psicologo(std::string cpf, std::string nome, std::string endereco, st
 		throw std::invalid_argument("Hora Invalida! Inicio maior que o fim");
 
 	agenda = new Agenda(inicio, fim);
+	this->_inicioExpediente = inicio;
+	this->_fimExpediente = fim;
 }
 
 Psicologo::Psicologo(std::vector<std::string> dados) 
@@ -58,4 +60,12 @@ std::string Psicologo::getConsulta(std::string in_dia, std::string in_mes, std::
 
 void Psicologo::imprimirConsultas() {
 	agenda->imprimirConsultas();
+}
+
+int Psicologo::getInicioExpediente() {
+	return this->_inicioExpediente;
+}
+
+int Psicologo::getFimExpediente() {
+	return this->_fimExpediente;
 }
