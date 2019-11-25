@@ -282,7 +282,6 @@ void Sistema::ambienteSecretaria()
 				if(opcao == "Limpar Tudo")
 					deletar(pacientes);
 			} while(opcao != "Voltar");
-<<<<<<< HEAD
 		} if(opcao == "Visualizar Agenda") {
 			try{
 				imprimirAgenda();
@@ -291,26 +290,6 @@ void Sistema::ambienteSecretaria()
 			}
 			std::cin.get();
 		} if(opcao == "Marcar Consulta") {
-=======
-		} 
-		
-		
-	
-		if (opcao == "Visualizar Agenda") {
-			do {
-				limparTela();
-				usuarioPsicologo->imprimirConsultas();
-				opcao = mostrarOpcoes({"Voltar"});
-			} while (opcao != "Voltar");
-
-
-		} 
-		
-		
-		
-		
-		if(opcao == "Marcar Consulta") {
->>>>>>> 267f5d04b51b536c9ae7c0de737820b42fe52ad7
 			do {
 				limparTela();
 				std::cout << opcao << std::endl;
