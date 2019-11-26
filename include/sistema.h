@@ -60,6 +60,7 @@ public:
     void cadastrar(Psicologo *psicologo);
 
     void marcarConsulta(std::vector<std::string>& dados);
+    void desmarcarConsulta(std::vector<std::string> dados);
     void imprimirAgenda();
     void addQueixa(Paciente* paciente, std::string queixa);
     std::string getQueixa(Paciente* paciente);

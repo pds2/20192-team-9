@@ -80,10 +80,13 @@ std::string Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
 			if(e > opcoes.size()) {
 				std::cin.clear();
 				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-				throw std::invalid_argument("Entrada maior que o permitido");
+				throw std::invalid_argument("Entrada fora do permitido");
 			}
-			if(e <= 0)
-				throw std::invalid_argument("Entrada menor ou igual a zero");
+			if(e == 0) {
+				std::cin.clear();
+				std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				throw std::invalid_argument("Entrada igual a zero");
+			}
 			flag = false;
 		} catch(std::invalid_argument &e) {
 			std::cout << e.what() << std::endl;
@@ -95,11 +98,7 @@ std::string Sistema::mostrarOpcoes(std::vector<std::string> opcoes)
 
 void Sistema::limparTela() 
 {
-	#ifdef WINDOWS
-		std::system("cls");
-	#else
-		std::system("clear");
-	#endif
+	std::cout << "\x1B[2J\x1B[H";
 }
 
 std::vector<std::string> Sistema::preencher(std::vector<std::string> campos) 
@@ -158,12 +157,12 @@ void Sistema::paginaInicial()
 				try {
 					cadastrar(new Pessoa(dados));
 					std::cout << "Secretaria Cadastrada!" << std::endl;
+					std::cin.get();
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
 					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
-				std::cin.get();
 			} while(opcao != "Voltar");
 		}
 		if (opcao == "Cadastrar Psicologo") {
@@ -174,12 +173,12 @@ void Sistema::paginaInicial()
 				try {
 					cadastrar(new Psicologo(dados));
 					std::cout << "Psicologo Cadastrado!" << std::endl;
+					std::cin.get();
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
 					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
-					std::cin.get();
 			} while(opcao != "Voltar");
 		} if (opcao == "Visualizar Secretarias") {
 			do {
@@ -210,7 +209,7 @@ void Sistema::ambienteSecretaria()
 	while(true) {
 		limparTela();
 		std::cout << "Logado:\t" << usuarioSecretaria->getNome() << "\t" << "Secretaria" << std::endl;
-		std::string opcao = mostrarOpcoes({"Visualizar Pacientes", "Visualizar Agenda", "Marcar Consulta", "Cadastrar Paciente", "Voltar para Pagina Inicial"});
+		std::string opcao = mostrarOpcoes({"Visualizar Pacientes", "Visualizar Agenda", "Marcar Consulta", "Desmarcar Consulta", "Cadastrar Paciente", "Voltar para Pagina Inicial"});
 		if(opcao == "Visualizar Pacientes") {
 			do {
 				limparTela();
@@ -234,13 +233,25 @@ void Sistema::ambienteSecretaria()
 				try {
 					marcarConsulta(dados);
 					std::cout << "Consulta Marcada!" << std::endl;
+					std::cin.get();
 					opcao = "Voltar";
 				} catch(std::invalid_argument &e) {
 					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
-				std::cin.get();
 			} while(opcao == "Tentar Novamente");
+		} if(opcao == "Desmarcar Consulta") {
+			limparTela();
+			std::vector<std::string> dados = preencher({"CPF do psicologo", "Dia", "Mes", "Ano", "Hora"});
+			try {
+				desmarcarConsulta(dados);
+				std::cout << "Consulta Desmarcada!" << std::endl;
+				std::cin.get();
+				opcao = "Voltar";
+			} catch (std::invalid_argument &e) {
+				std::cout << e.what() << std::endl;
+				opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
+			}
 		} if(opcao == "Cadastrar Paciente") {
 			do {
 				limparTela();
@@ -250,11 +261,11 @@ void Sistema::ambienteSecretaria()
 					cadastrar(new Paciente(dados));
 					std::cout << "Paciente Cadastrado!" << std::endl;
 					opcao = "Voltar";
+					std::cin.get();
 				} catch(std::invalid_argument &e) {
 					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
-				std::cin.get();
 			} while(opcao != "Voltar");
 		} if (opcao == "Voltar para Pagina Inicial")
 			break;
@@ -271,10 +282,9 @@ void Sistema::imprimirAgenda(){
 	if(psicologos.size() == 0)
 		throw std::invalid_argument("Nenhum psicologo Cadastrado!");
 	for(std::vector<Psicologo*>::iterator itr = psicologos.begin(); itr != psicologos.end(); itr++) {
-		std::cout <<"Agenda de"<< (*itr)->getNome() << std::endl;
+		std::cout <<"Agenda de "<< (*itr)->getNome() << std::endl;
 		(*itr)->imprimirConsultas();
 	}
-		std::cout << "Foi";
 	std::cin.get();
 }
 
@@ -414,12 +424,12 @@ void Sistema::ambientePsicologo()
 					getline(std::cin, queixa);
 					addQueixa(paciente, queixa);
 					std::cout << "Queixa cadastrada!" << std::endl;
+					std::cin.get();
 					opcao = "Voltar";
 				}catch(std::invalid_argument &e) {
 					std::cout << e.what() << std::endl;
 					opcao = mostrarOpcoes({"Tentar Novamente", "Voltar"});
 				}
-				std::cin.get();
 			} while(opcao != "Voltar");
 		} if (opcao == "Visualizar Pacientes") {
 			do {
@@ -440,4 +450,10 @@ std::string Sistema::getQueixa(Paciente* paciente) {
 
 void Sistema::addQueixa(Paciente* paciente, std::string queixa) {
 	paciente->addQueixa(queixa);
+}
+
+void Sistema::desmarcarConsulta(std::vector<std::string> dados) {
+	Psicologo *psicologo = encontrar(psicologos, dados[0]);
+	psicologo->desmarcarConsulta(dados[1], dados[2], dados[3], dados[4]);
+
 }
