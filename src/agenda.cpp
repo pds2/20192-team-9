@@ -100,7 +100,7 @@ void Agenda::adicionarConsulta(std::string paciente, int dia, int mes, int ano, 
 
 	//Marca a consulta
 	if( (*itr).consultas.count(hora) == 0 )
-		throw std::out_of_range("Horario fora do expediente do psicologo");
+		throw std::invalid_argument("Horario fora do expediente do psicologo");
 	if((*itr).consultas[hora] != "disponivel")
 		throw std::invalid_argument("Horario ocupado");
 	(*itr).consultas[hora] = paciente;
